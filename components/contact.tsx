@@ -62,12 +62,9 @@ export function Contact() {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    const uzPhoneRegex = /^\+998\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}$/;
 
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required";
-    } else if (!uzPhoneRegex.test(formData.phone)) {
-      newErrors.phone = "Format: +998 XX XXX XX XX";
     }
 
     if (!formData.message.trim()) newErrors.message = "Message is required";
