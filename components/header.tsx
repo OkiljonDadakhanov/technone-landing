@@ -50,7 +50,7 @@ export function Header() {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                className="text-gray-600 hover:text-gray-900 transition-colors duration-200 cursor-pointer"
               >
                 {item.label}
               </button>
