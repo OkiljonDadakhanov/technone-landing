@@ -1,43 +1,30 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapSection } from "./location";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
+
+const TELEGRAM_BOT_TOKEN = "8252392415:AAEp3LeItcKbZFyr7XCCJ9zcWL2mTkApkCE";
+const TELEGRAM_CHAT_ID = "5350135989";
 
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "+998",
     company: "",
-    service: "",
-    budget: "",
     message: "",
   });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // Reset form or show success message
-  };
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const contactInfo = [
     {
@@ -66,6 +53,70 @@ export function Contact() {
     },
   ];
 
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = "Full name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    const uzPhoneRegex = /^\+998\s?[0-9]{2}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}$/;
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!uzPhoneRegex.test(formData.phone)) {
+      newErrors.phone = "Format: +998 XX XXX XX XX";
+    }
+
+    if (!formData.message.trim()) newErrors.message = "Message is required";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const sendToTelegram = async () => {
+    const text = `
+📩 New Contact Message:
+👤 Name: ${formData.name}
+📧 Email: ${formData.email}
+📞 Phone: ${formData.phone}
+🏢 Company: ${formData.company || "-"}
+💬 Message: ${formData.message}
+    `;
+
+    const response = await fetch(
+      `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text,
+          parse_mode: "HTML",
+        }),
+      }
+    );
+
+    const result = await response.json();
+    return result.ok;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+    const success = await sendToTelegram();
+    if (success) {
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+    } else {
+      alert("Failed to send message. Please try again later.");
+    }
+    setIsSubmitting(false);
+  };
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,46 +125,26 @@ export function Contact() {
             Get In Touch
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to start your next project? We'd love to hear from you. Send
-            us a message and we'll respond as soon as possible.
+            Ready to start your next project? Send us a message and we’ll get
+            back to you.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Information */}
-          <div className="lg:col-span-1">
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  Contact Information
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  We're here to help and answer any question you might have. We
-                  look forward to hearing from you.
-                </p>
+          {/* Contact Info */}
+          <div className="space-y-6">
+            {contactInfo.map((info, i) => (
+              <div key={i} className="flex items-start space-x-4">
+                <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <info.icon className="text-emerald-600 w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                  <p className="text-gray-900 font-medium">{info.details}</p>
+                  <p className="text-gray-600 text-sm">{info.description}</p>
+                </div>
               </div>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <info.icon className="h-5 w-5 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        {info.title}
-                      </h4>
-                      <p className="text-gray-900 font-medium">
-                        {info.details}
-                      </p>
-                      <p className="text-gray-600 text-sm">
-                        {info.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Contact Form */}
@@ -123,134 +154,113 @@ export function Contact() {
                 <CardTitle>Send us a message</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                {isSuccess ? (
+                  <div className="text-green-600 font-semibold py-6">
+                    ✅ Your message has been sent successfully!
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Full Name *</Label>
+                        <Input
+                          id="name"
+                          value={formData.name}
+                          onChange={(e) => handleChange("name", e.target.value)}
+                          placeholder="Your full name"
+                          className={errors.name ? "border-red-500" : ""}
+                        />
+                        {errors.name && (
+                          <p className="text-red-500 text-sm">{errors.name}</p>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) =>
+                            handleChange("email", e.target.value)
+                          }
+                          placeholder="your@email.com"
+                          className={errors.email ? "border-red-500" : ""}
+                        />
+                        {errors.email && (
+                          <p className="text-red-500 text-sm">{errors.email}</p>
+                        )}
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="name">Full Name *</Label>
+                      <Label htmlFor="phone">Phone Number *</Label>
+                      <PhoneInput
+                        country={"uz"}
+                        value={formData.phone}
+                        onChange={(value) => handleChange("phone", value)}
+                        inputProps={{
+                          name: "phone",
+                          required: true,
+                          className: `block w-full rounded-md border border-input bg-background px-9 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
+                            errors.phone ? "border-red-500" : ""
+                          }`,
+                        }}
+                        containerStyle={{ width: "100%" }}
+                        buttonStyle={{
+                          border: "none",
+                          background: "none",
+                        }}
+                        dropdownStyle={{
+                          maxHeight: "150px",
+                        }}
+                        enableSearch
+                      />
+
+                      {errors.phone && (
+                        <p className="text-red-500 text-sm">{errors.phone}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="company">Company</Label>
                       <Input
-                        id="name"
-                        value={formData.name}
+                        id="company"
+                        value={formData.company}
                         onChange={(e) =>
-                          handleInputChange("name", e.target.value)
+                          handleChange("company", e.target.value)
                         }
-                        placeholder="Your full name"
-                        required
+                        placeholder="Company (optional)"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={formData.email}
+                      <Label htmlFor="message">Message *</Label>
+                      <Textarea
+                        id="message"
+                        value={formData.message}
                         onChange={(e) =>
-                          handleInputChange("email", e.target.value)
+                          handleChange("message", e.target.value)
                         }
-                        placeholder="your@email.com"
-                        required
+                        placeholder="Tell us about your project or inquiry"
+                        rows={6}
+                        className={errors.message ? "border-red-500" : ""}
                       />
+                      {errors.message && (
+                        <p className="text-red-500 text-sm">{errors.message}</p>
+                      )}
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company</Label>
-                    <Input
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) =>
-                        handleInputChange("company", e.target.value)
-                      }
-                      placeholder="Your company name"
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="service">Service Interested In</Label>
-                      <Select
-                        onValueChange={(value) =>
-                          handleInputChange("service", value)
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a service" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="custom-development">
-                            Custom Software Development
-                          </SelectItem>
-                          <SelectItem value="mobile-app">
-                            Mobile App Development
-                          </SelectItem>
-                          <SelectItem value="web-app">
-                            Web App Development
-                          </SelectItem>
-                          <SelectItem value="saas">
-                            SaaS Product Development
-                          </SelectItem>
-                          <SelectItem value="cloud">Cloud Solutions</SelectItem>
-                          <SelectItem value="uiux">UI/UX Design</SelectItem>
-                          <SelectItem value="maintenance">
-                            Maintenance & Support
-                          </SelectItem>
-                          <SelectItem value="consulting">Consulting</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="budget">Project Budget</Label>
-                      <Select
-                        onValueChange={(value) =>
-                          handleInputChange("budget", value)
-                        }
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select budget range" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="under-25k">
-                            Under $25,000
-                          </SelectItem>
-                          <SelectItem value="25k-50k">
-                            $25,000 - $50,000
-                          </SelectItem>
-                          <SelectItem value="50k-100k">
-                            $50,000 - $100,000
-                          </SelectItem>
-                          <SelectItem value="100k-250k">
-                            $100,000 - $250,000
-                          </SelectItem>
-                          <SelectItem value="over-250k">
-                            Over $250,000
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Project Details *</Label>
-                    <Textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) =>
-                        handleInputChange("message", e.target.value)
-                      }
-                      placeholder="Tell us about your project, requirements, timeline, and any specific needs..."
-                      rows={6}
-                      required
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full cursor-pointer"
-                  >
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
-                  </Button>
-                </form>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full cursor-pointer"
+                      disabled={isSubmitting}
+                    >
+                      <Send className="mr-2 h-4 w-4 " />
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </Button>
+                  </form>
+                )}
               </CardContent>
             </Card>
           </div>
