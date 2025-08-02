@@ -114,6 +114,16 @@ export function Contact() {
     setIsSubmitting(false);
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      const timeout = setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000); // 3 seconds
+
+      return () => clearTimeout(timeout);
+    }
+  }, [isSuccess]);
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
