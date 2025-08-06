@@ -1,15 +1,30 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Star } from "lucide-react"
+"use client";
+
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Star } from "lucide-react";
 
 export function Products() {
+  useEffect(() => {
+    AOS.init({ duration: 1000, easing: "ease-in-out", once: true });
+  }, []);
+
   const products = [
     {
       name: "TechnFlow",
       description:
         "A comprehensive project management and workflow automation platform designed for software development teams.",
-      features: ["Task Management", "Team Collaboration", "Time Tracking", "Automated Reporting"],
+      features: [
+        "Task Management",
+        "Team Collaboration",
+        "Time Tracking",
+        "Automated Reporting",
+      ],
       image: "/placeholder.svg?height=300&width=500",
       status: "Live",
       rating: 4.8,
@@ -19,7 +34,12 @@ export function Products() {
       name: "DataSync Pro",
       description:
         "Enterprise-grade data integration and synchronization tool for seamless data flow across multiple platforms.",
-      features: ["Real-time Sync", "API Integration", "Data Transformation", "Security Compliance"],
+      features: [
+        "Real-time Sync",
+        "API Integration",
+        "Data Transformation",
+        "Security Compliance",
+      ],
       image: "/placeholder.svg?height=300&width=500",
       status: "Beta",
       rating: 4.6,
@@ -27,39 +47,63 @@ export function Products() {
     },
     {
       name: "CloudMonitor",
-      description: "Advanced cloud infrastructure monitoring and alerting system with AI-powered insights.",
-      features: ["Real-time Monitoring", "AI Insights", "Custom Alerts", "Performance Analytics"],
+      description:
+        "Advanced cloud infrastructure monitoring and alerting system with AI-powered insights.",
+      features: [
+        "Real-time Monitoring",
+        "AI Insights",
+        "Custom Alerts",
+        "Performance Analytics",
+      ],
       image: "/placeholder.svg?height=300&width=500",
       status: "Coming Soon",
       rating: null,
       users: null,
     },
-  ]
+  ];
 
   return (
-    <section id="products" className="py-20 bg-white">
+    <section
+      id="products"
+      className="py-24 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden"
+    >
+      {/* Decorative background blur */}
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-emerald-200 opacity-30 rounded-full blur-[150px] -z-10" />
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Discover our suite of innovative software products designed to streamline business operations and boost
-            productivity.
+        <div className="text-center mb-20" data-aos="fade-up">
+          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+            Our Products
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Discover our suite of innovative software products designed to
+            streamline business operations and boost productivity.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-10">
           {products.map((product, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <Card
+              key={index}
+              className="overflow-hidden bg-white/70 backdrop-blur-md border border-gray-200 shadow-xl hover:shadow-2xl transition-all duration-300"
+              data-aos="fade-up"
+              data-aos-delay={index * 150}
+            >
+              {/* Product image and badge */}
               <div className="relative">
                 <img
                   src={product.image || "/placeholder.svg"}
                   alt={product.name}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-52 object-cover"
                 />
                 <div className="absolute top-4 right-4">
                   <Badge
                     variant={
-                      product.status === "Live" ? "default" : product.status === "Beta" ? "secondary" : "outline"
+                      product.status === "Live"
+                        ? "default"
+                        : product.status === "Beta"
+                        ? "secondary"
+                        : "outline"
                     }
                   >
                     {product.status}
@@ -67,27 +111,38 @@ export function Products() {
                 </div>
               </div>
 
+              {/* Title and rating */}
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl">{product.name}</CardTitle>
+                  <CardTitle className="text-xl text-gray-900">
+                    {product.name}
+                  </CardTitle>
                   {product.rating && (
                     <div className="flex items-center space-x-1">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{product.rating}</span>
+                      <span className="text-sm font-medium text-gray-700">
+                        {product.rating}
+                      </span>
                     </div>
                   )}
                 </div>
               </CardHeader>
 
+              {/* Description, features, users, and buttons */}
               <CardContent>
                 <p className="text-gray-600 mb-4">{product.description}</p>
 
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Key Features:</h4>
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Key Features:
+                    </h4>
                     <ul className="space-y-1">
-                      {product.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="text-sm text-gray-600 flex items-center">
+                      {product.features.map((feature, i) => (
+                        <li
+                          key={i}
+                          className="text-sm text-gray-600 flex items-center"
+                        >
                           <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2"></div>
                           {feature}
                         </li>
@@ -97,7 +152,8 @@ export function Products() {
 
                   {product.users && (
                     <div className="text-sm text-gray-500">
-                      <span className="font-medium">{product.users}</span> active users
+                      <span className="font-medium">{product.users}</span>{" "}
+                      active users
                     </div>
                   )}
 
@@ -113,12 +169,17 @@ export function Products() {
                       </>
                     )}
                     {product.status === "Beta" && (
-                      <Button size="sm" variant="outline" className="flex-1 bg-transparent">
+                      <Button size="sm" variant="outline" className="flex-1">
                         Join Beta
                       </Button>
                     )}
                     {product.status === "Coming Soon" && (
-                      <Button size="sm" variant="outline" className="flex-1 bg-transparent" disabled>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="flex-1"
+                        disabled
+                      >
                         Coming Soon
                       </Button>
                     )}
@@ -130,5 +191,5 @@ export function Products() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,13 +36,25 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-sm shadow-sm" : "bg-transparent"
+        isScrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <span className="text-2xl font-bold text-gray-900">TechnOne</span>
+          {/* Logo */}
+
+          {/* <Image
+            src="/images/logo.png" // Use your actual logo path here
+            alt="TechnOne Logo"
+            width={150}
+            height={40}
+            className="h-8 w-auto"
+          /> */}
+
+          <div className="text-2xl font-extrabold tracking-tight text-gray-900 cursor-pointer">
+            Techn<span className="text-emerald-600">One</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -50,24 +63,28 @@ export function Header() {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="text-gray-600 hover:text-gray-900 transition-colors duration-200 cursor-pointer"
+                className="relative text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer"
               >
-                {item.label}
+                <span className="inline-block relative group">
+                  {item.label}
+                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
+                </span>
               </button>
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop CTA Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
             <Button
               variant="outline"
               onClick={() => scrollToSection("#contact")}
-              className="cursor-pointer"
+              className="hover:border-emerald-500 transition-colors cursor-pointer"
             >
               Get Quote
             </Button>
             <Button
               onClick={() => scrollToSection("#contact")}
-              className="cursor-pointer"
+              className="bg-emerald-600 hover:bg-emerald-700 text-white transition-colors cursor-pointer"
             >
               Contact Us
             </Button>
@@ -75,41 +92,39 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="md:hidden text-gray-800"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-t">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => scrollToSection(item.href)}
-                  className="block w-full text-left px-3 py-2 text-gray-600 hover:text-gray-900"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <div className="pt-4 space-y-2">
-                <Button
-                  variant="outline"
-                  className="w-full bg-transparent"
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  Get Quote
-                </Button>
-                <Button
-                  className="w-full"
-                  onClick={() => scrollToSection("#contact")}
-                >
-                  Contact Us
-                </Button>
-              </div>
+          <div className="md:hidden mt-2 bg-white/95 backdrop-blur-xl rounded-lg shadow-lg border px-4 py-6 space-y-4">
+            {navItems.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                className="block w-full text-left text-base font-medium text-gray-700 hover:text-emerald-600 transition-colors"
+              >
+                {item.label}
+              </button>
+            ))}
+            <div className="pt-2 space-y-3">
+              <Button
+                variant="outline"
+                className="w-full border-gray-300"
+                onClick={() => scrollToSection("#contact")}
+              >
+                Get Quote
+              </Button>
+              <Button
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                onClick={() => scrollToSection("#contact")}
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
         )}

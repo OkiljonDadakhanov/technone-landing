@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,10 +14,14 @@ import { MapSection } from "./location";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
-const TELEGRAM_BOT_TOKEN = "8252392415:AAEp3LeItcKbZFyr7XCCJ9zcWL2mTkApkCE";
-const TELEGRAM_CHAT_ID = "5350135989";
+const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
+const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
 
 export function Contact() {
+  useEffect(() => {
+    AOS.init({ duration: 1000, easing: "ease-in-out", once: true });
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,6 +29,7 @@ export function Contact() {
     company: "",
     message: "",
   });
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,11 +70,7 @@ export function Contact() {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Full name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required";
-    }
-
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.message.trim()) newErrors.message = "Message is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -81,7 +85,6 @@ export function Contact() {
 🏢 Company: ${formData.company || "-"}
 💬 Message: ${formData.message}
     `;
-
     const response = await fetch(
       `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
       {
@@ -94,7 +97,6 @@ export function Contact() {
         }),
       }
     );
-
     const result = await response.json();
     return result.ok;
   };
@@ -102,12 +104,17 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-
     setIsSubmitting(true);
     const success = await sendToTelegram();
     if (success) {
       setIsSuccess(true);
-      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "+998",
+        company: "",
+        message: "",
+      });
     } else {
       alert("Failed to send message. Please try again later.");
     }
@@ -116,22 +123,23 @@ export function Contact() {
 
   useEffect(() => {
     if (isSuccess) {
-      const timeout = setTimeout(() => {
-        setIsSuccess(false);
-      }, 3000); // 3 seconds
-
+      const timeout = setTimeout(() => setIsSuccess(false), 4000);
       return () => clearTimeout(timeout);
     }
   }, [isSuccess]);
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section
+      id="contact"
+      className="py-24 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden"
+    >
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-emerald-200 opacity-30 rounded-full blur-[150px] -z-10" />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-20" data-aos="fade-up">
+          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Ready to start your next project? Send us a message and we’ll get
             back to you.
           </p>
@@ -139,7 +147,7 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6" data-aos="fade-up" data-aos-delay="100">
             {contactInfo.map((info, i) => (
               <div key={i} className="flex items-start space-x-4">
                 <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
@@ -154,15 +162,21 @@ export function Contact() {
             ))}
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card>
+          {/* Form */}
+          <div
+            className="lg:col-span-2"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <Card className="bg-white/80 backdrop-blur-md border border-gray-200 shadow-xl">
               <CardHeader>
-                <CardTitle>Send us a message</CardTitle>
+                <CardTitle className="text-lg text-gray-900">
+                  Send us a message
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 {isSuccess ? (
-                  <div className="text-green-600 font-semibold py-6">
+                  <div className="text-green-600 font-semibold py-6 text-center animate-pulse">
                     ✅ Your message has been sent successfully!
                   </div>
                 ) : (
@@ -190,7 +204,7 @@ export function Contact() {
                           onChange={(e) =>
                             handleChange("email", e.target.value)
                           }
-                          placeholder="your@email.com"
+                          placeholder="you@example.com"
                           className={errors.email ? "border-red-500" : ""}
                         />
                         {errors.email && (
@@ -208,21 +222,15 @@ export function Contact() {
                         inputProps={{
                           name: "phone",
                           required: true,
-                          className: `block w-full rounded-md border border-input bg-background px-9 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
-                            errors.phone ? "border-red-500" : ""
+                          className: `block w-full rounded-md border px-9 py-2 text-sm ${
+                            errors.phone ? "border-red-500" : "border-input"
                           }`,
                         }}
                         containerStyle={{ width: "100%" }}
-                        buttonStyle={{
-                          border: "none",
-                          background: "none",
-                        }}
-                        dropdownStyle={{
-                          maxHeight: "150px",
-                        }}
+                        buttonStyle={{ border: "none", background: "none" }}
+                        dropdownStyle={{ maxHeight: "150px" }}
                         enableSearch
                       />
-
                       {errors.phone && (
                         <p className="text-red-500 text-sm">{errors.phone}</p>
                       )}
@@ -260,10 +268,10 @@ export function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full cursor-pointer"
+                      className="w-full"
                       disabled={isSubmitting}
                     >
-                      <Send className="mr-2 h-4 w-4 " />
+                      <Send className="mr-2 h-4 w-4" />
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
@@ -273,14 +281,14 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Map Section */}
-        <div className="mt-16">
+        {/* Map */}
+        <div className="mt-20" data-aos="fade-up" data-aos-delay="300">
           <h3 className="text-xl font-bold text-gray-900 mb-4">Visit Us</h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-6 max-w-xl">
             Our office is located in the heart of San Francisco. Feel free to
             stop by during business hours or schedule an appointment.
           </p>
-          <div className="aspect-w-16 aspect-h-9">
+          <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
             <MapSection />
           </div>
         </div>
