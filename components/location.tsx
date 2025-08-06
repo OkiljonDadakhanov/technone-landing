@@ -18,11 +18,10 @@ export function MapSection() {
             ></iframe>
           </div>
           <div className="py-4 text-center">
-            <MapPin className="h-6 w-6 text-gray-400 mx-auto mb-1" />
-            <p className="text-gray-600">
-              123 Tech Street, San Francisco, CA 94105
+            
+            <p className="text-gray-600"><MapPin className="h-6 w-6 text-gray-400 mx-auto mb-1" />
+              Bakhodir 6, Qorasuv 2, Mirzo Ulug'bek, Tashkent
             </p>
-        
           </div>
         </CardContent>
       </Card>

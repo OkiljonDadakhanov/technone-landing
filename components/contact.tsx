@@ -38,19 +38,19 @@ export function Contact() {
     {
       icon: Mail,
       title: "Email",
-      details: "hello@technone.com",
+      details: "okiljondadakhonov@gmail.com",
       description: "Send us an email anytime",
     },
     {
       icon: Phone,
       title: "Phone",
-      details: "+1 (555) 123-4567",
+      details: "+998 99 109 34 14",
       description: "Mon-Fri from 9am to 6pm",
     },
     {
       icon: MapPin,
       title: "Office",
-      details: "123 Tech Street, San Francisco, CA 94105",
+      details: "Bakhodir 6, Qorasuv 2, Mirzo Ulug'bek, Tashkent",
       description: "Visit our headquarters",
     },
     {
@@ -285,7 +285,7 @@ export function Contact() {
         <div className="mt-20" data-aos="fade-up" data-aos-delay="300">
           <h3 className="text-xl font-bold text-gray-900 mb-4">Visit Us</h3>
           <p className="text-gray-600 mb-6 max-w-xl">
-            Our office is located in the heart of San Francisco. Feel free to
+            Our office is located in the heart of Tashkent. Feel free to
             stop by during business hours or schedule an appointment.
           </p>
           <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
