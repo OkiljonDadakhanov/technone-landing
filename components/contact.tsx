@@ -14,8 +14,8 @@ import { MapSection } from "./location";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 
-const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";
-const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";
+const TELEGRAM_BOT_TOKEN = "8252392415:AAEp3LeItcKbZFyr7XCCJ9zcWL2mTkApkCE";
+const TELEGRAM_CHAT_ID = "5350135989";
 
 export function Contact() {
   useEffect(() => {
@@ -268,10 +268,10 @@ export function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full"
+                      className="w-full cursor-pointer"
                       disabled={isSubmitting}
                     >
-                      <Send className="mr-2 h-4 w-4" />
+                      <Send className="mr-2 h-4 w-4 " />
                       {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>

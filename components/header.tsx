@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,9 +55,10 @@ export function Header() {
           /> */}
 
           <div className="text-2xl font-extrabold tracking-tight text-gray-900 cursor-pointer">
-            Techn<span className="text-emerald-600">One</span>
+            <Link href="/" className="flex items-center">
+              Techn<span className="text-emerald-600">One</span>
+            </Link>
           </div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
