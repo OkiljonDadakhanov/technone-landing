@@ -57,7 +57,7 @@ export function Technologies() {
         },
         {
           name: "Java",
-          logo: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/java/java-original.svg",
+          logo: "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jsdelivr.svg",
         },
         {
           name: "Go",
