@@ -4,8 +4,10 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 
 export function Technologies() {
+  const t = useTranslations("Technologies");
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -201,11 +203,10 @@ export function Technologies() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20" data-aos="fade-up">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Technologies & Tools
+            {t("heading")}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We leverage industry-leading technologies to engineer elegant,
-            scalable, and future-ready solutions tailored to your vision.
+            {t("description")}
           </p>
         </div>
 

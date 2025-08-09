@@ -16,8 +16,10 @@ import {
   Database,
   Shield,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Services() {
+  const t = useTranslations("Services");
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -93,11 +95,10 @@ export function Services() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16" data-aos="fade-up">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Our Services
+            {t("heading")}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We offer comprehensive software development services to help your
-            business thrive in the digital landscape.
+            {t("description")}
           </p>
         </div>
 
@@ -146,7 +147,7 @@ export function Services() {
               if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
           >
-            Discuss Your Project
+            {t("cta")}
           </Button>
         </div>
       </div>

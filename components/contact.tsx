@@ -13,11 +13,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapSection } from "./location";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
+import { useTranslations } from "next-intl";
 
 const TELEGRAM_BOT_TOKEN = "8252392415:AAEp3LeItcKbZFyr7XCCJ9zcWL2mTkApkCE";
 const TELEGRAM_CHAT_ID = "5350135989";
 
 export function Contact() {
+  const t = useTranslations("Contact");
   useEffect(() => {
     AOS.init({ duration: 1000, easing: "ease-in-out", once: true });
   }, []);
@@ -37,27 +39,27 @@ export function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      title: t("info.email.title"),
       details: "okiljondadakhonov@gmail.com",
-      description: "Send us an email anytime",
+      description: t("info.email.description"),
     },
     {
       icon: Phone,
-      title: "Phone",
+      title: t("info.phone.title"),
       details: "+998 99 109 34 14",
-      description: "Mon-Fri from 9am to 6pm",
+      description: t("info.phone.description"),
     },
     {
       icon: MapPin,
-      title: "Office",
+      title: t("info.office.title"),
       details: "Bakhodir 6, Qorasuv 2, Mirzo Ulug'bek, Tashkent",
-      description: "Visit our headquarters",
+      description: t("info.office.description"),
     },
     {
       icon: Clock,
-      title: "Business Hours",
+      title: t("info.hours.title"),
       details: "Mon-Fri: 9:00 AM - 6:00 PM PST",
-      description: "We're here to help",
+      description: t("info.hours.description"),
     },
   ];
 
@@ -68,10 +70,10 @@ export function Contact() {
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) newErrors.name = "Full name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
+    if (!formData.name.trim()) newErrors.name = t("errors.nameRequired");
+    if (!formData.email.trim()) newErrors.email = t("errors.emailRequired");
+    if (!formData.phone.trim()) newErrors.phone = t("errors.phoneRequired");
+    if (!formData.message.trim()) newErrors.message = t("errors.messageRequired");
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -137,11 +139,10 @@ export function Contact() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20" data-aos="fade-up">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Get In Touch
+            {t("heading")}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Ready to start your next project? Send us a message and we’ll get
-            back to you.
+            {t("description")}
           </p>
         </div>
 
@@ -171,24 +172,24 @@ export function Contact() {
             <Card className="bg-white/80 backdrop-blur-md border border-gray-200 shadow-xl">
               <CardHeader>
                 <CardTitle className="text-lg text-gray-900">
-                  Send us a message
+                  {t("sendMessage")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 {isSuccess ? (
                   <div className="text-green-600 font-semibold py-6 text-center animate-pulse">
-                    ✅ Your message has been sent successfully!
+                    ✅ {t("success")}
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
+                        <Label htmlFor="name">{t("fields.fullName")}</Label>
                         <Input
                           id="name"
                           value={formData.name}
                           onChange={(e) => handleChange("name", e.target.value)}
-                          placeholder="Your full name"
+                          placeholder={t("placeholders.fullName")}
                           className={errors.name ? "border-red-500" : ""}
                         />
                         {errors.name && (
@@ -196,7 +197,7 @@ export function Contact() {
                         )}
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
+                        <Label htmlFor="email">{t("fields.email")}</Label>
                         <Input
                           id="email"
                           type="email"
@@ -204,7 +205,7 @@ export function Contact() {
                           onChange={(e) =>
                             handleChange("email", e.target.value)
                           }
-                          placeholder="you@example.com"
+                          placeholder={t("placeholders.email")}
                           className={errors.email ? "border-red-500" : ""}
                         />
                         {errors.email && (
@@ -214,7 +215,7 @@ export function Contact() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number *</Label>
+                      <Label htmlFor="phone">{t("fields.phone")}</Label>
                       <PhoneInput
                         country={"uz"}
                         value={formData.phone}
@@ -222,9 +223,8 @@ export function Contact() {
                         inputProps={{
                           name: "phone",
                           required: true,
-                          className: `block w-full rounded-md border px-9 py-2 text-sm ${
-                            errors.phone ? "border-red-500" : "border-input"
-                          }`,
+                          className: `block w-full rounded-md border px-9 py-2 text-sm ${errors.phone ? "border-red-500" : "border-input"
+                            }`,
                         }}
                         containerStyle={{ width: "100%" }}
                         buttonStyle={{ border: "none", background: "none" }}
@@ -237,26 +237,26 @@ export function Contact() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="company">Company</Label>
+                      <Label htmlFor="company">{t("fields.company")}</Label>
                       <Input
                         id="company"
                         value={formData.company}
                         onChange={(e) =>
                           handleChange("company", e.target.value)
                         }
-                        placeholder="Company (optional)"
+                        placeholder={t("placeholders.company")}
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
+                      <Label htmlFor="message">{t("fields.message")}</Label>
                       <Textarea
                         id="message"
                         value={formData.message}
                         onChange={(e) =>
                           handleChange("message", e.target.value)
                         }
-                        placeholder="Tell us about your project or inquiry"
+                        placeholder={t("placeholders.message")}
                         rows={6}
                         className={errors.message ? "border-red-500" : ""}
                       />
@@ -272,7 +272,7 @@ export function Contact() {
                       disabled={isSubmitting}
                     >
                       <Send className="mr-2 h-4 w-4 " />
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? t("button.sending") : t("button.send")}
                     </Button>
                   </form>
                 )}
@@ -283,10 +283,9 @@ export function Contact() {
 
         {/* Map */}
         <div className="mt-20" data-aos="fade-up" data-aos-delay="300">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Visit Us</h3>
+          <h3 className="text-xl font-bold text-gray-900 mb-4">{t("visit.heading")}</h3>
           <p className="text-gray-600 mb-6 max-w-xl">
-            Our office is located in the heart of Tashkent. Feel free to
-            stop by during business hours or schedule an appointment.
+            {t("visit.description")}
           </p>
           <div className="aspect-w-16 aspect-h-9 overflow-hidden rounded-lg shadow-md">
             <MapSection />

@@ -8,8 +8,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Products() {
+  const t = useTranslations("Products");
   useEffect(() => {
     AOS.init({ duration: 1000, easing: "ease-in-out", once: true });
   }, []);
@@ -73,11 +75,10 @@ export function Products() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20" data-aos="fade-up">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Our Products
+            {t("heading")}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Discover our suite of innovative software products designed to
-            streamline business operations and boost productivity.
+            {t("description")}
           </p>
         </div>
 
@@ -102,8 +103,8 @@ export function Products() {
                       product.status === "Live"
                         ? "default"
                         : product.status === "Beta"
-                        ? "secondary"
-                        : "outline"
+                          ? "secondary"
+                          : "outline"
                     }
                   >
                     {product.status}
@@ -135,7 +136,7 @@ export function Products() {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">
-                      Key Features:
+                      {t("keyFeatures")}
                     </h4>
                     <ul className="space-y-1">
                       {product.features.map((feature, i) => (
@@ -153,7 +154,7 @@ export function Products() {
                   {product.users && (
                     <div className="text-sm text-gray-500">
                       <span className="font-medium">{product.users}</span>{" "}
-                      active users
+                      {t("activeUsers")}
                     </div>
                   )}
 
@@ -161,7 +162,7 @@ export function Products() {
                     {product.status === "Live" && (
                       <>
                         <Button size="sm" className="flex-1">
-                          Try Free Demo
+                          {t("buttons.tryDemo")}
                         </Button>
                         <Button size="sm" variant="outline">
                           <ExternalLink className="h-4 w-4" />
@@ -170,7 +171,7 @@ export function Products() {
                     )}
                     {product.status === "Beta" && (
                       <Button size="sm" variant="outline" className="flex-1">
-                        Join Beta
+                        {t("buttons.joinBeta")}
                       </Button>
                     )}
                     {product.status === "Coming Soon" && (
@@ -180,7 +181,7 @@ export function Products() {
                         className="flex-1"
                         disabled
                       >
-                        Coming Soon
+                        {t("buttons.comingSoon")}
                       </Button>
                     )}
                   </div>

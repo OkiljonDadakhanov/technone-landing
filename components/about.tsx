@@ -6,8 +6,10 @@ import "aos/dist/aos.css";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Heart, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function About() {
+  const t = useTranslations("About");
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -19,27 +21,23 @@ export function About() {
   const values = [
     {
       icon: Target,
-      title: "Innovation",
-      description:
-        "We stay ahead of technology trends to deliver cutting-edge solutions.",
+      title: t("values.innovation.title"),
+      description: t("values.innovation.description"),
     },
     {
       icon: Eye,
-      title: "Quality",
-      description:
-        "Every line of code is crafted with precision and attention to detail.",
+      title: t("values.quality.title"),
+      description: t("values.quality.description"),
     },
     {
       icon: Heart,
-      title: "Passion",
-      description:
-        "We love what we do and it shows in every project we deliver.",
+      title: t("values.passion.title"),
+      description: t("values.passion.description"),
     },
     {
       icon: Users,
-      title: "Collaboration",
-      description:
-        "We work closely with our clients as true technology partners.",
+      title: t("values.collaboration.title"),
+      description: t("values.collaboration.description"),
     },
   ];
 
@@ -52,13 +50,11 @@ export function About() {
         {/* Section Header */}
         <div className="text-center mb-20 max-w-4xl mx-auto" data-aos="fade-up">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
-            About <span className="text-emerald-600">TechnOne</span>
+            {t.rich("heading", {
+              brand: (chunks) => <span className="text-emerald-600">{chunks}</span>,
+            })}
           </h2>
-          <p className="text-lg text-gray-600">
-            Founded to bridge the gap between vision and execution, TechnOne
-            empowers digital transformation through clean code and bold
-            thinking.
-          </p>
+          <p className="text-lg text-gray-600">{t("intro")}</p>
         </div>
 
         {/* Story Section */}
@@ -68,17 +64,9 @@ export function About() {
           data-aos-delay="100"
         >
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-900">Our Story</h3>
-            <p className="text-gray-700 leading-relaxed">
-              Since inception, we've focused on crafting software that doesn't
-              just solve problems—it creates opportunity. Our team of
-              developers, designers, and thinkers operate at the intersection of
-              function and beauty.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              We treat every project as a mission to innovate, aligning with
-              your goals and accelerating your journey through digital success.
-            </p>
+            <h3 className="text-2xl font-bold text-gray-900">{t("story.title")}</h3>
+            <p className="text-gray-700 leading-relaxed">{t("story.p1")}</p>
+            <p className="text-gray-700 leading-relaxed">{t("story.p2")}</p>
           </div>
           <div className="relative">
             <div
@@ -96,9 +84,9 @@ export function About() {
           </div>
         </div>
 
-       
+
         {/* Core Values */}
-       
+
       </div>
     </section>
   );

@@ -6,8 +6,10 @@ import Image from "next/image";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useTranslations } from "next-intl";
 
 export function Hero() {
+  const t = useTranslations("Hero");
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -37,20 +39,18 @@ export function Hero() {
                 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
                 data-aos="fade-up"
               >
-                Empowering{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-700">
-                  Innovation
-                </span>{" "}
-                Through Software
+                {t.rich("title", {
+                  em: (chunks) => (
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-700">{chunks}</span>
+                  ),
+                })}
               </h1>
               <p
                 className="text-lg text-gray-600 leading-relaxed max-w-xl"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                At TechnOne, we create elegant, scalable software solutions that
-                align with your business goals. From MVPs to full-scale
-                platforms—we make tech work for you.
+                {t("description")}
               </p>
             </div>
 
@@ -62,7 +62,7 @@ export function Hero() {
                 data-aos="fade-up"
                 data-aos-delay="200"
               >
-                Get Started
+                {t("cta.getStarted")}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -74,7 +74,7 @@ export function Hero() {
                 data-aos-delay="200"
               >
                 <Play className="mr-2 h-5 w-5" />
-                See Our Work
+                {t("cta.seeOurWork")}
               </Button>
             </div>
 
@@ -84,9 +84,9 @@ export function Hero() {
               data-aos-delay="300"
             >
               {[
-                { label: "Projects Delivered", value: "5+" },
-                { label: "Client Satisfaction", value: "98%" },
-                { label: "Years Experience", value: "3+" },
+                { label: t("stats.projects"), value: "5+" },
+                { label: t("stats.satisfaction"), value: "98%" },
+                { label: t("stats.experience"), value: "3+" },
               ].map((stat) => (
                 <div className="text-center" key={stat.label}>
                   <div className="text-3xl font-bold text-gray-900">

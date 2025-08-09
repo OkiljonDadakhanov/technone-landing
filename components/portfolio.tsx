@@ -2,8 +2,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export function Portfolio() {
+  const t = useTranslations("Portfolio");
   const projects = [
     {
       title: "E-Commerce Platform Redesign",
@@ -65,11 +67,10 @@ export function Portfolio() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Case Studies & Portfolio
+            {t("heading")}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore how we've helped businesses transform their operations with
-            innovative software solutions.
+            {t("description")}
           </p>
         </div>
 
@@ -97,7 +98,7 @@ export function Portfolio() {
                       {project.title}
                     </h3>
                     <p className="text-sm text-emerald-600 font-medium">
-                      Client: {project.client}
+                      {t("client")} {project.client}
                     </p>
                   </div>
 
@@ -106,14 +107,14 @@ export function Portfolio() {
                   <div className="space-y-3">
                     <div>
                       <h4 className="font-semibold text-gray-900 text-sm">
-                        Problem:
+                        {t("problem")}
                       </h4>
                       <p className="text-sm text-gray-600">{project.problem}</p>
                     </div>
 
                     <div>
                       <h4 className="font-semibold text-gray-900 text-sm">
-                        Our Solution:
+                        {t("solution")}
                       </h4>
                       <p className="text-sm text-gray-600">
                         {project.solution}
@@ -122,7 +123,7 @@ export function Portfolio() {
 
                     <div>
                       <h4 className="font-semibold text-gray-900 text-sm">
-                        Results:
+                        {t("results")}
                       </h4>
                       <p className="text-sm text-emerald-600 font-medium">
                         {project.result}
@@ -132,7 +133,7 @@ export function Portfolio() {
 
                   <div>
                     <h4 className="font-semibold text-gray-900 text-sm mb-2">
-                      Technologies Used:
+                      {t("technologiesUsed")}
                     </h4>
                     <div className="flex flex-wrap gap-1">
                       {project.technologies.map((tech, techIndex) => (
@@ -152,7 +153,7 @@ export function Portfolio() {
                       variant="outline"
                       className="flex-1 bg-transparent cursor-pointer"
                     >
-                      View Case Study
+                      {t("buttons.viewCaseStudy")}
                       <ArrowRight className="ml-2 h-3 w-3" />
                     </Button>
                     <Button
@@ -171,7 +172,7 @@ export function Portfolio() {
 
         <div className="text-center mt-12 cursor-pointer">
           <Button size="lg">
-            View All Projects
+            {t("buttons.viewAll")}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>

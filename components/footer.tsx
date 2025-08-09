@@ -1,34 +1,36 @@
 "use client"
 
 import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram } from "lucide-react"
+import { useTranslations } from "next-intl"
 
 export function Footer() {
+  const t = useTranslations("Footer")
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
     company: [
-      { name: "About Us", href: "#about" },
-      { name: "Our Team", href: "#about" },
-      { name: "Careers", href: "#careers" },
-      { name: "Contact", href: "#contact" },
+      { name: t("links.company.aboutUs"), href: "#about" },
+      { name: t("links.company.ourTeam"), href: "#about" },
+      { name: t("links.company.careers"), href: "#careers" },
+      { name: t("links.company.contact"), href: "#contact" },
     ],
     services: [
-      { name: "Custom Development", href: "#services" },
-      { name: "Mobile Apps", href: "#services" },
-      { name: "Web Applications", href: "#services" },
-      { name: "Cloud Solutions", href: "#services" },
+      { name: t("links.services.customDev"), href: "#services" },
+      { name: t("links.services.mobileApps"), href: "#services" },
+      { name: t("links.services.webApps"), href: "#services" },
+      { name: t("links.services.cloudSolutions"), href: "#services" },
     ],
     resources: [
-      { name: "Blog", href: "#blog" },
-      { name: "Case Studies", href: "#portfolio" },
-      { name: "Documentation", href: "#" },
-      { name: "Support", href: "#contact" },
+      { name: t("links.resources.blog"), href: "#blog" },
+      { name: t("links.resources.caseStudies"), href: "#portfolio" },
+      { name: t("links.resources.documentation"), href: "#" },
+      { name: t("links.resources.support"), href: "#contact" },
     ],
     legal: [
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms of Service", href: "#" },
-      { name: "Cookie Policy", href: "#" },
-      { name: "GDPR", href: "#" },
+      { name: t("links.legal.privacy"), href: "#" },
+      { name: t("links.legal.terms"), href: "#" },
+      { name: t("links.legal.cookies"), href: "#" },
+      { name: t("links.legal.gdpr"), href: "#" },
     ],
   }
 
@@ -57,8 +59,7 @@ export function Footer() {
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-4">TechnOne</h3>
               <p className="text-gray-300 leading-relaxed mb-6">
-                We craft innovative software solutions that transform ideas into powerful, scalable applications. Your
-                trusted technology partner for digital success.
+                {t("companyDescription")}
               </p>
             </div>
 
@@ -80,7 +81,7 @@ export function Footer() {
 
           {/* Footer Links */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <h4 className="font-semibold mb-4">{t("columns.company")}</h4>
             <ul className="space-y-2">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
@@ -96,7 +97,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Services</h4>
+            <h4 className="font-semibold mb-4">{t("columns.services")}</h4>
             <ul className="space-y-2">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
@@ -112,7 +113,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Resources</h4>
+            <h4 className="font-semibold mb-4">{t("columns.resources")}</h4>
             <ul className="space-y-2">
               {footerLinks.resources.map((link, index) => (
                 <li key={index}>
@@ -159,7 +160,9 @@ export function Footer() {
 
           <div className="text-center mt-8">
             <p className="text-gray-400 text-sm">
-              © {currentYear} TechnOne. All rights reserved. Built with passion for innovation.
+              {t.rich("copyright", {
+                year: () => currentYear.toString(),
+              })}
             </p>
           </div>
         </div>

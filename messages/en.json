@@ -1,0 +1,173 @@
+{
+  "Header": {
+    "nav": {
+      "about": "About",
+      "services": "Services",
+      "products": "Products",
+      "portfolio": "Portfolio",
+      "contact": "Contact"
+    },
+    "cta": {
+      "getQuote": "Get Quote",
+      "contactUs": "Contact Us"
+    }
+  },
+  "Hero": {
+    "title": "Empowering <em>Innovation</em> Through Software",
+    "description": "At TechnOne, we create elegant, scalable software solutions that align with your business goals. From MVPs to full-scale platforms—we make tech work for you.",
+    "cta": {
+      "getStarted": "Get Started",
+      "seeOurWork": "See Our Work"
+    },
+    "stats": {
+      "projects": "Projects Delivered",
+      "satisfaction": "Client Satisfaction",
+      "experience": "Years Experience"
+    }
+  },
+  "About": {
+    "heading": "About <brand>TechnOne</brand>",
+    "intro": "Founded to bridge the gap between vision and execution, TechnOne empowers digital transformation through clean code and bold thinking.",
+    "story": {
+      "title": "Our Story",
+      "p1": "Since inception, we've focused on crafting software that doesn't just solve problems—it creates opportunity. Our team of developers, designers, and thinkers operate at the intersection of function and beauty.",
+      "p2": "We treat every project as a mission to innovate, aligning with your goals and accelerating your journey through digital success."
+    },
+    "values": {
+      "innovation": {
+        "title": "Innovation",
+        "description": "We stay ahead of technology trends to deliver cutting-edge solutions."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Every line of code is crafted with precision and attention to detail."
+      },
+      "passion": {
+        "title": "Passion",
+        "description": "We love what we do and it shows in every project we deliver."
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "We work closely with our clients as true technology partners."
+      }
+    }
+  },
+  "Services": {
+    "heading": "Our Services",
+    "description": "We offer comprehensive software development services to help your business thrive in the digital landscape.",
+    "cta": "Discuss Your Project"
+  },
+  "Products": {
+    "heading": "Our Products",
+    "description": "Discover our suite of innovative software products designed to streamline business operations and boost productivity.",
+    "keyFeatures": "Key Features:",
+    "activeUsers": "active users",
+    "buttons": {
+      "tryDemo": "Try Free Demo",
+      "joinBeta": "Join Beta",
+      "comingSoon": "Coming Soon"
+    }
+  },
+  "Portfolio": {
+    "heading": "Case Studies & Portfolio",
+    "description": "Explore how we've helped businesses transform their operations with innovative software solutions.",
+    "client": "Client:",
+    "problem": "Problem:",
+    "solution": "Our Solution:",
+    "results": "Results:",
+    "technologiesUsed": "Technologies Used:",
+    "buttons": {
+      "viewCaseStudy": "View Case Study",
+      "viewAll": "View All Projects"
+    }
+  },
+  "Technologies": {
+    "heading": "Technologies & Tools",
+    "description": "We leverage industry-leading technologies to engineer elegant, scalable, and future-ready solutions tailored to your vision."
+  },
+  "Testimonials": {
+    "heading": "What Our Clients Say",
+    "description": "Don't just take our word for it. Here's what our clients have to say about working with TechnOne.",
+    "trustedBy": "Trusted by Leading Companies"
+  },
+  "Contact": {
+    "heading": "Get In Touch",
+    "description": "Ready to start your next project? Send us a message and we’ll get back to you.",
+    "sendMessage": "Send us a message",
+    "success": "Your message has been sent successfully!",
+    "fields": {
+      "fullName": "Full Name *",
+      "email": "Email Address *",
+      "phone": "Phone Number *",
+      "company": "Company",
+      "message": "Message *"
+    },
+    "placeholders": {
+      "fullName": "Your full name",
+      "email": "you@example.com",
+      "company": "Company (optional)",
+      "message": "Tell us about your project or inquiry"
+    },
+    "errors": {
+      "nameRequired": "Full name is required",
+      "emailRequired": "Email is required",
+      "phoneRequired": "Phone number is required",
+      "messageRequired": "Message is required"
+    },
+    "button": {
+      "send": "Send Message",
+      "sending": "Sending..."
+    },
+    "info": {
+      "email": { "title": "Email", "description": "Send us an email anytime" },
+      "phone": { "title": "Phone", "description": "Mon-Fri from 9am to 6pm" },
+      "office": { "title": "Office", "description": "Visit our headquarters" },
+      "hours": {
+        "title": "Business Hours",
+        "description": "We're here to help"
+      }
+    },
+    "visit": {
+      "heading": "Visit Us",
+      "description": "Our office is located in the heart of Tashkent. Feel free to stop by during business hours or schedule an appointment."
+    }
+  },
+  "Footer": {
+    "companyDescription": "We craft innovative software solutions that transform ideas into powerful, scalable applications. Your trusted technology partner for digital success.",
+    "columns": {
+      "company": "Company",
+      "services": "Services",
+      "resources": "Resources"
+    },
+    "links": {
+      "company": {
+        "aboutUs": "About Us",
+        "ourTeam": "Our Team",
+        "careers": "Careers",
+        "contact": "Contact"
+      },
+      "services": {
+        "customDev": "Custom Development",
+        "mobileApps": "Mobile Apps",
+        "webApps": "Web Applications",
+        "cloudSolutions": "Cloud Solutions"
+      },
+      "resources": {
+        "blog": "Blog",
+        "caseStudies": "Case Studies",
+        "documentation": "Documentation",
+        "support": "Support"
+      },
+      "legal": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy",
+        "gdpr": "GDPR"
+      }
+    },
+    "copyright": "© <year/> TechnOne. All rights reserved. Built with passion for innovation."
+  },
+  "Location": {
+    "mapTitle": "Map"
+  }
+}
