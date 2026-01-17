@@ -1,179 +1,116 @@
 {
   "Header": {
     "nav": {
-      "about": "Biz haqimizda",
       "services": "Xizmatlar",
-      "products": "Mahsulotlar",
-      "portfolio": "Portfolio",
+      "projects": "Ishlar",
+      "about": "Biz haqimizda",
       "contact": "Aloqa"
     },
     "cta": {
-      "getQuote": "Narx olish",
-      "contactUs": "Biz bilan bog'lanish"
+      "contactUs": "Bog'lanish"
     }
   },
   "Hero": {
-    "title": "Dasturiy ta'minot orqali <em>Innovatsiya</em>ni kuchaytiramiz",
-    "description": "TechnOne kompaniyasida biz biznes maqsadlaringizga mos, chiroyli va masshtablanadigan yechimlar yaratamiz. MVP-lardan tortib to'liq platformalargacha — texnologiyani siz uchun ishlatamiz.",
+    "title": "Veb-saytingiz — <em>24/7 ishlaydigan sotuvchi</em>",
+    "description": "Biz siz uxlayotganda ishlaydigan yuqori konversiyali veb-saytlar yaratamiz. SEO-optimallashtirilgan, chaqmoqdek tez va tashrif buyuruvchilarni mijozlarga aylantirish uchun mo'ljallangan.",
     "cta": {
-      "getStarted": "Boshlash",
+      "primary": "Loyiha boshlash",
       "seeOurWork": "Ishlarimizni ko'rish"
     },
     "stats": {
       "projects": "Tugallangan loyihalar",
-      "satisfaction": "Mijozlar qoniqishi",
-      "experience": "Tajriba yillari"
+      "monthlyVisits": "Oylik tashriflar",
+      "loadTime": "Yuklanish vaqti"
+    }
+  },
+  "Benefits": {
+    "seo": {
+      "title": "Natija beradigan SEO",
+      "description": "Bizning saytlarimiz yuqori o'rinlarda. Strategik SEO orqali mijozlarga oyiga 25,000+ tashrif keltirdik."
+    },
+    "speed": {
+      "title": "Chaqmoq tezligi",
+      "description": "Bir soniyadan kam yuklanish vaqti. Har bir kechikish soniyasi sizga 7% konversiya yo'qotadi."
+    },
+    "sales": {
+      "title": "Sotish uchun yaratilgan",
+      "description": "Veb-saytingiz buklet emas — u kechayu kunduz ishlaydigan eng mehnatsevar sotuvchi."
+    }
+  },
+  "Services": {
+    "heading": "Biz nima yaratamiz",
+    "description": "Faqat chiroyli ko'rinadigan emas — natija beradigan veb-saytlar. Har bir piksel konversiya uchun ishlaydi.",
+    "services": {
+      "customDev": {
+        "title": "Sotuvchi saytlar",
+        "description": "Konversiyaga yo'naltirilgan veb-saytlar. Sizning 24/7 ishlaydigan raqamli sotish mashinangiz."
+      },
+      "mobile": {
+        "title": "Mobil ilovalar",
+        "description": "Mijozlaringizni harakatda ushlab turadigan mahalliy va kross-platforma ilovalar."
+      },
+      "web": {
+        "title": "Veb ilovalar",
+        "description": "Tez, masshtablanadigan veb ilovalar. Birinchi kundan tezlik va SEO uchun optimallashtirilgan."
+      },
+      "design": {
+        "title": "UI/UX Dizayn",
+        "description": "Konversiya uchun mo'ljallangan foydalanuvchi yo'llari. Harakatga undaydigan interfeyslar."
+      }
+    }
+  },
+  "Projects": {
+    "heading": "Tanlangan ishlar",
+    "description": "Haqiqiy biznes uchun haqiqiy natijalar. Mijozlarimiz uchun yaratganimizni ko'ring.",
+    "items": {
+      "edux": "Optimallashtirilgan UX va yuqori organik trafik bilan ta'lim platformasi.",
+      "epixrent": "Tezkor bron qilish bilan avtomobil ijarasi platformasi — konvertatsiya qilish uchun yaratilgan.",
+      "arbicho": "Minglab ishtirokchilar bilan Xalqaro Kimyo Olimpiadasi platformasi.",
+      "gradabroad": "Xalqaro imkoniyatlarni topishda talabalarga yordam beruvchi platforma.",
+      "trapo": "Real vaqt ko'rinishi va qulay to'lov bilan 3D kiyim sozlash platformasi.",
+      "khimio": "Yuqori faollik darajasi bilan Xalqaro Olimpiada platformasi."
     }
   },
   "About": {
     "heading": "<brand>TechnOne</brand> haqida",
-    "intro": "Texnologiya va maqsad o'rtasidagi tafovutni bartaraf etish uchun tashkil etilgan TechnOne toza kod va dadil fikrlash orqali raqamli transformatsiyani tezlashtiradi.",
+    "intro": "Biz faqat dasturchilar emasmiz — biz o'sish hamkorlarimiz. Toshkentdan butun dunyo bo'ylab mijozlarga haqiqiy biznes natijalarini keltiradigan veb-saytlar yaratamiz.",
     "story": {
-      "title": "Bizning hikoyamiz",
-      "p1": "Tashkil topganimizdan beri biz nafaqat muammolarni hal qiladigan, balki imkoniyat yaratuvchi dasturlar yaratishga e'tibor qaratamiz. Dasturchilar, dizaynerlar va mutaxassislardan iborat jamoamiz funksionallik va go'zallik kesishmasida ishlaydi.",
-      "p2": "Har bir loyihani innovatsiya missiyasi sifatida ko'ramiz, maqsadlaringizga moslashib, raqamli muvaffaqiyat sari yo'lingizni tezlashtiramiz."
-    },
-    "values": {
-      "innovation": {
-        "title": "Innovatsiya",
-        "description": "Eng so'nggi texnologiya trendlaridan xabardor bo'lib, ilg'or yechimlar taqdim etamiz."
-      },
-      "quality": {
-        "title": "Sifat",
-        "description": "Har bir kod satri aniqlik va e'tibor bilan yoziladi."
-      },
-      "passion": {
-        "title": "Ishtiyoq",
-        "description": "Ishimizni sevamiz va bu har bir loyihamizda yaqqol ko'rinadi."
-      },
-      "collaboration": {
-        "title": "Hamkorlik",
-        "description": "Mijozlarimiz bilan haqiqiy texnologik hamkor sifatida yaqindan ishlaymiz."
-      }
+      "p1": "Biz strategik SEO orqali bizneslarga oyiga 25,000+ tashrifga erishishga yordam berdik. Saytlarimiz bir soniyadan kamroq vaqtda yuklanadi. Lekin eng muhimi — ular tashrif buyuruvchilarni mijozlarga aylantiradi, siz uchun 24/7 ishlaydi."
     }
-  },
-  "Services": {
-    "heading": "Xizmatlarimiz",
-    "description": "Biz biznesingizning raqamli olamda rivojlanishi uchun keng qamrovli dasturiy ta'minot xizmatlarini taklif etamiz.",
-    "cta": "Loyihangizni muhokama qilamiz"
-  },
-  "Products": {
-    "heading": "Mahsulotlarimiz",
-    "description": "Biznes jarayonlarini soddalashtirish va samaradorlikni oshirish uchun mo'ljallangan innovatsion dasturiy mahsulotlar to'plamimizni kashf qiling.",
-    "keyFeatures": "Asosiy imkoniyatlar:",
-    "activeUsers": "faol foydalanuvchi",
-    "buttons": {
-      "tryDemo": "Bepul demoni sinab ko'rish",
-      "joinBeta": "Beta dasturiga qo'shilish",
-      "comingSoon": "Tez orada"
-    }
-  },
-  "Portfolio": {
-    "heading": "Keýslar va Portfolio",
-    "description": "Bizneslarga innovatsion dasturiy yechimlar orqali qanday yordam berganimizni ko'rib chiqing.",
-    "client": "Mijoz:",
-    "problem": "Muammo:",
-    "solution": "Yechimimiz:",
-    "results": "Natijalar:",
-    "technologiesUsed": "Qo'llanilgan texnologiyalar:",
-    "buttons": {
-      "viewCaseStudy": "Keýsni ko'rish",
-      "viewAll": "Barcha loyihalarni ko'rish"
-    }
-  },
-  "Technologies": {
-    "heading": "Texnologiyalar va Asboblar",
-    "description": "Biz sizning maqsadlaringizga mos, nafis, masshtablanadigan va kelajakka tayyor yechimlar yaratish uchun yetakchi texnologiyalardan foydalanamiz."
-  },
-  "Testimonials": {
-    "heading": "Mijozlarimiz fikri",
-    "description": "Faqat bizning gapimizga ishonmang. TechnOne bilan ishlash haqida mijozlarimiz nimalar deyishadi.",
-    "trustedBy": "Yirik kompaniyalar ishonadi"
   },
   "Contact": {
-    "heading": "Biz bilan bog'laning",
-    "description": "Keyingi loyihangizni boshlashga tayyormisiz? Bizga xabar yuboring va tez orada javob beramiz.",
-    "sendMessage": "Bizga xabar yuboring",
-    "success": "Xabaringiz muvaffaqiyatli yuborildi!",
+    "heading": "Sotadigan narsa yarataylik",
+    "description": "Siz kabi qattiq ishlaydigan veb-saytga tayyormisiz?",
+    "success": "Xabar yuborildi! 24 soat ichida javob beramiz.",
     "fields": {
-      "fullName": "To'liq ism *",
-      "email": "Elektron pochta *",
-      "phone": "Telefon raqami *",
-      "company": "Kompaniya",
-      "message": "Xabar *"
+      "fullName": "Ism",
+      "phone": "Telefon",
+      "message": "Xabar"
     },
     "placeholders": {
-      "fullName": "To'liq ismingiz",
-      "email": "siz@example.com",
-      "company": "Kompaniya (ixtiyoriy)",
-      "message": "Loyihangiz yoki so'rovingiz haqida yozing"
+      "fullName": "Ismingiz",
+      "message": "Loyihangiz va maqsadlaringiz haqida yozing"
     },
     "errors": {
-      "nameRequired": "To'liq ism majburiy",
-      "emailRequired": "Elektron pochta majburiy",
-      "phoneRequired": "Telefon raqami majburiy",
+      "nameRequired": "Ism majburiy",
+      "phoneRequired": "Telefon majburiy",
       "messageRequired": "Xabar majburiy"
     },
     "button": {
       "send": "Xabar yuborish",
       "sending": "Yuborilmoqda..."
-    },
-    "info": {
-      "email": { "title": "Email", "description": "Istalgan vaqtda yozing" },
-      "phone": {
-        "title": "Telefon",
-        "description": "Dushanba-Juma 9:00-18:00"
-      },
-      "office": {
-        "title": "Ofis",
-        "description": "Bosh ofisimizga tashrif buyuring"
-      },
-      "hours": {
-        "title": "Ish vaqti",
-        "description": "Yordam berishga tayyormiz"
-      }
-    },
-    "visit": {
-      "heading": "Bizga tashrif buyuring",
-      "description": "Ofisimiz Toshkent markazida joylashgan. Ish vaqtida tashrif buyurishingiz yoki uchrashuv rejalashtirishingiz mumkin."
     }
   },
   "Footer": {
-    "companyDescription": "Biz g'oyalarni qudratli, masshtablanadigan ilovalarga aylantiruvchi innovatsion dasturiy yechimlar yaratamiz. Raqamli muvaffaqiyat uchun ishonchli texnologik hamkoringiz.",
-    "columns": {
-      "company": "Kompaniya",
-      "services": "Xizmatlar",
-      "resources": "Resurslar"
-    },
+    "companyDescription": "Biz sotadigan veb-saytlar yaratamiz. Tez yuklanadigan, SEO-optimallashtirilgan va tashrif buyuruvchilarni mijozlarga aylantirish uchun mo'ljallangan — 24/7.",
+    "navigation": "Navigatsiya",
+    "contactTitle": "Aloqa",
     "links": {
-      "company": {
-        "aboutUs": "Biz haqimizda",
-        "ourTeam": "Jamoamiz",
-        "careers": "Karyera",
-        "contact": "Aloqa"
-      },
-      "services": {
-        "customDev": "Maxsus dasturlash",
-        "mobileApps": "Mobil ilovalar",
-        "webApps": "Veb ilovalar",
-        "cloudSolutions": "Bulutli yechimlar"
-      },
-      "resources": {
-        "blog": "Blog",
-        "caseStudies": "Keýslar",
-        "documentation": "Hujjatlar",
-        "support": "Qo'llab-quvvatlash"
-      },
-      "legal": {
-        "privacy": "Maxfiylik siyosati",
-        "terms": "Foydalanish shartlari",
-        "cookies": "Cookie siyosati",
-        "gdpr": "GDPR"
-      }
+      "services": "Xizmatlar",
+      "projects": "Ishlar",
+      "about": "Biz haqimizda",
+      "contact": "Aloqa"
     },
-    "copyright": "© <year/> TechnOne. Barcha huquqlar himoyalangan. Innovatsiyaga muhabbat bilan yaratilgan."
-  },
-  "Location": {
-    "mapTitle": "Xarita"
+    "copyright": "© <year/> TechnOne. Barcha huquqlar himoyalangan."
   }
 }

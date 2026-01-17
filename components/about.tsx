@@ -1,92 +1,34 @@
 "use client";
 
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-import { Card, CardContent } from "@/components/ui/card";
-import { Target, Eye, Heart, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function About() {
   const t = useTranslations("About");
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-    });
-  }, []);
-
-  const values = [
-    {
-      icon: Target,
-      title: t("values.innovation.title"),
-      description: t("values.innovation.description"),
-    },
-    {
-      icon: Eye,
-      title: t("values.quality.title"),
-      description: t("values.quality.description"),
-    },
-    {
-      icon: Heart,
-      title: t("values.passion.title"),
-      description: t("values.passion.description"),
-    },
-    {
-      icon: Users,
-      title: t("values.collaboration.title"),
-      description: t("values.collaboration.description"),
-    },
-  ];
 
   return (
-    <section id="about" className="py-24 bg-gray-50 relative overflow-hidden">
-      {/* Light background blur accent */}
-      <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-emerald-100 blur-[150px] rounded-full opacity-40 -z-10"></div>
-
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="py-24 bg-gray-50"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-20 max-w-4xl mx-auto" data-aos="fade-up">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+        <div className="max-w-3xl mx-auto text-center" data-aos="fade-up">
+          <h2 id="about-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
             {t.rich("heading", {
-              brand: (chunks) => <span className="text-emerald-600">{chunks}</span>,
+              brand: (chunks) => (
+                <span className="text-emerald-600">{chunks}</span>
+              ),
             })}
           </h2>
-          <p className="text-lg text-gray-600">{t("intro")}</p>
-        </div>
-
-        {/* Story Section */}
-        <div
-          className="grid lg:grid-cols-2 gap-16 items-center mb-24"
-          data-aos="fade-up"
-          data-aos-delay="100"
-        >
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-gray-900">{t("story.title")}</h3>
-            <p className="text-gray-700 leading-relaxed">{t("story.p1")}</p>
-            <p className="text-gray-700 leading-relaxed">{t("story.p2")}</p>
-          </div>
-          <div className="relative">
-            <div
-              className="relative z-10 rounded-xl overflow-hidden shadow-2xl"
-              data-aos="zoom-in"
-              data-aos-delay="200"
-            >
-              <img
-                src="/images/about.jpg"
-                alt="TechnOne Team"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-4 -right-4 w-full h-full bg-emerald-100 rounded-xl -z-10"></div>
+          <p className="text-lg text-gray-600 leading-relaxed mb-8">
+            {t("intro")}
+          </p>
+          <div className="prose prose-gray max-w-none">
+            <p className="text-gray-600 leading-relaxed">
+              {t("story.p1")}
+            </p>
           </div>
         </div>
-
-
-        {/* Core Values */}
-
       </div>
     </section>
   );

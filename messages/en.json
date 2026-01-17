@@ -1,173 +1,116 @@
 {
   "Header": {
     "nav": {
-      "about": "About",
       "services": "Services",
-      "products": "Products",
-      "portfolio": "Portfolio",
+      "projects": "Work",
+      "about": "About",
       "contact": "Contact"
     },
     "cta": {
-      "getQuote": "Get Quote",
-      "contactUs": "Contact Us"
+      "contactUs": "Get in Touch"
     }
   },
   "Hero": {
-    "title": "Empowering <em>Innovation</em> Through Software",
-    "description": "At TechnOne, we create elegant, scalable software solutions that align with your business goals. From MVPs to full-scale platforms—we make tech work for you.",
+    "title": "Your website is your <em>24/7 sales team</em>",
+    "description": "We build high-converting websites that work while you sleep. SEO-optimized, lightning-fast, and designed to turn visitors into customers.",
     "cta": {
-      "getStarted": "Get Started",
-      "seeOurWork": "See Our Work"
+      "primary": "Start a Project",
+      "seeOurWork": "View Our Work"
     },
     "stats": {
       "projects": "Projects Delivered",
-      "satisfaction": "Client Satisfaction",
-      "experience": "Years Experience"
+      "monthlyVisits": "Monthly Visits Generated",
+      "loadTime": "Avg. Load Time"
+    }
+  },
+  "Benefits": {
+    "seo": {
+      "title": "SEO That Delivers",
+      "description": "Our websites rank. We've generated 25,000+ monthly visits for clients through strategic SEO optimization."
+    },
+    "speed": {
+      "title": "Lightning Fast",
+      "description": "Sub-second load times. Because every second of delay costs you 7% in conversions."
+    },
+    "sales": {
+      "title": "Built to Convert",
+      "description": "Your website isn't a brochure—it's your hardest-working salesperson, closing deals around the clock."
+    }
+  },
+  "Services": {
+    "heading": "What We Build",
+    "description": "Websites that don't just look good—they perform. Every pixel is designed to drive results.",
+    "services": {
+      "customDev": {
+        "title": "Selling Websites",
+        "description": "Conversion-focused websites that turn traffic into revenue. Your 24/7 digital sales machine."
+      },
+      "mobile": {
+        "title": "Mobile Apps",
+        "description": "Native and cross-platform apps that keep your customers engaged on the go."
+      },
+      "web": {
+        "title": "Web Applications",
+        "description": "Fast, scalable web apps built with modern tech. Optimized for speed and SEO from day one."
+      },
+      "design": {
+        "title": "UI/UX Design",
+        "description": "User journeys designed to convert. Beautiful interfaces that guide visitors to take action."
+      }
+    }
+  },
+  "Projects": {
+    "heading": "Selected Work",
+    "description": "Real results for real businesses. See what we've built for our clients.",
+    "items": {
+      "edux": "Educational platform with optimized user experience and strong organic traffic.",
+      "epixrent": "Car rental platform with instant booking—designed to convert browsers into renters.",
+      "arbicho": "International Chemistry Olympiad platform reaching thousands of participants globally.",
+      "gradabroad": "Study abroad platform helping students discover international opportunities.",
+      "trapo": "3D streetwear customization platform with real-time preview and seamless checkout.",
+      "khimio": "International Math & Informatics Olympiad platform with high engagement rates."
     }
   },
   "About": {
     "heading": "About <brand>TechnOne</brand>",
-    "intro": "Founded to bridge the gap between vision and execution, TechnOne empowers digital transformation through clean code and bold thinking.",
+    "intro": "We're not just developers—we're growth partners. Based in Tashkent, we build websites that generate real business results for clients worldwide.",
     "story": {
-      "title": "Our Story",
-      "p1": "Since inception, we've focused on crafting software that doesn't just solve problems—it creates opportunity. Our team of developers, designers, and thinkers operate at the intersection of function and beauty.",
-      "p2": "We treat every project as a mission to innovate, aligning with your goals and accelerating your journey through digital success."
-    },
-    "values": {
-      "innovation": {
-        "title": "Innovation",
-        "description": "We stay ahead of technology trends to deliver cutting-edge solutions."
-      },
-      "quality": {
-        "title": "Quality",
-        "description": "Every line of code is crafted with precision and attention to detail."
-      },
-      "passion": {
-        "title": "Passion",
-        "description": "We love what we do and it shows in every project we deliver."
-      },
-      "collaboration": {
-        "title": "Collaboration",
-        "description": "We work closely with our clients as true technology partners."
-      }
+      "p1": "We've helped businesses achieve 25,000+ monthly visits through strategic SEO. Our websites load in under a second. But what matters most? They convert visitors into customers, working for you 24/7."
     }
-  },
-  "Services": {
-    "heading": "Our Services",
-    "description": "We offer comprehensive software development services to help your business thrive in the digital landscape.",
-    "cta": "Discuss Your Project"
-  },
-  "Products": {
-    "heading": "Our Products",
-    "description": "Discover our suite of innovative software products designed to streamline business operations and boost productivity.",
-    "keyFeatures": "Key Features:",
-    "activeUsers": "active users",
-    "buttons": {
-      "tryDemo": "Try Free Demo",
-      "joinBeta": "Join Beta",
-      "comingSoon": "Coming Soon"
-    }
-  },
-  "Portfolio": {
-    "heading": "Case Studies & Portfolio",
-    "description": "Explore how we've helped businesses transform their operations with innovative software solutions.",
-    "client": "Client:",
-    "problem": "Problem:",
-    "solution": "Our Solution:",
-    "results": "Results:",
-    "technologiesUsed": "Technologies Used:",
-    "buttons": {
-      "viewCaseStudy": "View Case Study",
-      "viewAll": "View All Projects"
-    }
-  },
-  "Technologies": {
-    "heading": "Technologies & Tools",
-    "description": "We leverage industry-leading technologies to engineer elegant, scalable, and future-ready solutions tailored to your vision."
-  },
-  "Testimonials": {
-    "heading": "What Our Clients Say",
-    "description": "Don't just take our word for it. Here's what our clients have to say about working with TechnOne.",
-    "trustedBy": "Trusted by Leading Companies"
   },
   "Contact": {
-    "heading": "Get In Touch",
-    "description": "Ready to start your next project? Send us a message and we’ll get back to you.",
-    "sendMessage": "Send us a message",
-    "success": "Your message has been sent successfully!",
+    "heading": "Let's Build Something That Sells",
+    "description": "Ready for a website that works as hard as you do?",
+    "success": "Message sent! We'll get back to you within 24 hours.",
     "fields": {
-      "fullName": "Full Name *",
-      "email": "Email Address *",
-      "phone": "Phone Number *",
-      "company": "Company",
-      "message": "Message *"
+      "fullName": "Name",
+      "phone": "Phone",
+      "message": "Message"
     },
     "placeholders": {
-      "fullName": "Your full name",
-      "email": "you@example.com",
-      "company": "Company (optional)",
-      "message": "Tell us about your project or inquiry"
+      "fullName": "Your name",
+      "message": "Tell us about your project and goals"
     },
     "errors": {
-      "nameRequired": "Full name is required",
-      "emailRequired": "Email is required",
-      "phoneRequired": "Phone number is required",
+      "nameRequired": "Name is required",
+      "phoneRequired": "Phone is required",
       "messageRequired": "Message is required"
     },
     "button": {
       "send": "Send Message",
       "sending": "Sending..."
-    },
-    "info": {
-      "email": { "title": "Email", "description": "Send us an email anytime" },
-      "phone": { "title": "Phone", "description": "Mon-Fri from 9am to 6pm" },
-      "office": { "title": "Office", "description": "Visit our headquarters" },
-      "hours": {
-        "title": "Business Hours",
-        "description": "We're here to help"
-      }
-    },
-    "visit": {
-      "heading": "Visit Us",
-      "description": "Our office is located in the heart of Tashkent. Feel free to stop by during business hours or schedule an appointment."
     }
   },
   "Footer": {
-    "companyDescription": "We craft innovative software solutions that transform ideas into powerful, scalable applications. Your trusted technology partner for digital success.",
-    "columns": {
-      "company": "Company",
-      "services": "Services",
-      "resources": "Resources"
-    },
+    "companyDescription": "We build websites that sell. Fast-loading, SEO-optimized, and designed to convert visitors into customers—24/7.",
+    "navigation": "Navigation",
+    "contactTitle": "Contact",
     "links": {
-      "company": {
-        "aboutUs": "About Us",
-        "ourTeam": "Our Team",
-        "careers": "Careers",
-        "contact": "Contact"
-      },
-      "services": {
-        "customDev": "Custom Development",
-        "mobileApps": "Mobile Apps",
-        "webApps": "Web Applications",
-        "cloudSolutions": "Cloud Solutions"
-      },
-      "resources": {
-        "blog": "Blog",
-        "caseStudies": "Case Studies",
-        "documentation": "Documentation",
-        "support": "Support"
-      },
-      "legal": {
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Service",
-        "cookies": "Cookie Policy",
-        "gdpr": "GDPR"
-      }
+      "services": "Services",
+      "projects": "Work",
+      "about": "About",
+      "contact": "Contact"
     },
-    "copyright": "© <year/> TechnOne. All rights reserved. Built with passion for innovation."
-  },
-  "Location": {
-    "mapTitle": "Map"
+    "copyright": "© <year/> TechnOne. All rights reserved."
   }
 }

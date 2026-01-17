@@ -1,85 +1,112 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
-import { Menu, X, Globe, Check } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/src/i18n/navigation";
 import { routing } from "@/src/i18n/routing";
 
-/** Flag image (FlagCDN) like in your template */
-function Flag({ code, alt }: { code: string; alt: string }) {
-  if (!code) return <span aria-hidden>🌐</span>;
-  return (
-    <img
-      src={`https://flagcdn.com/24x18/${code}.png`}
-      srcSet={`https://flagcdn.com/24x18/${code}.png 1x, https://flagcdn.com/36x27/${code}.png 1.5x, https://flagcdn.com/48x36/${code}.png 2x`}
-      width={24}
-      height={18}
-      alt={alt}
-      className="rounded-[2px] shadow-sm ring-1 ring-gray-200"
-      loading="eager"
-    />
-  );
-}
+const localeConfig: Record<string, { name: string; short: string; flag: string }> = {
+  en: { name: "English", short: "EN", flag: "gb" },
+  ru: { name: "Русский", short: "RU", flag: "ru" },
+  uz: { name: "O'zbekcha", short: "UZ", flag: "uz" },
+};
 
-function LanguageSwitcher({ className = "" }: { className?: string }) {
+function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Map app locales -> human label + FlagCDN country code
-  const locales: Record<string, { name: string; code: string }> = {
-    en: { name: "English", code: "gb" }, // use GB for English, like your list
-    ru: { name: "Русский", code: "ru" },
-    uz: { name: "O‘zbekcha", code: "uz" },
-  };
+  const current = localeConfig[locale] || localeConfig.en;
 
-  const current = locales[locale] ?? { name: locale.toUpperCase(), code: "" };
+  // Close on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
+    }
+  }, [isOpen]);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className={`gap-2 ${className} cursor-pointer`}
-          aria-label="Change language"
-          title="Change language"
-        >
-          <Flag code={current.code} alt={`${current.name} flag`} />
-          <span className="hidden sm:inline">{current.name}</span>
-          <span className="sm:hidden">{locale.toUpperCase()}</span>
-        </Button>
-      </DropdownMenuTrigger>
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
+        className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-label={`Current language: ${current.name}. Click to change language.`}
+      >
+        <img
+          src={`https://flagcdn.com/20x15/${current.flag}.png`}
+          width={20}
+          height={15}
+          alt=""
+          aria-hidden="true"
+          className="rounded-sm"
+        />
+        <span className="hidden sm:inline">{current.short}</span>
+        <ChevronDown
+          size={14}
+          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+          aria-hidden="true"
+        />
+      </button>
 
-      <DropdownMenuContent align="end" className="min-w-44">
-        <DropdownMenuLabel className="text-xs text-muted-foreground">
-          Select language
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {routing.locales.map((loc) => {
-          const item =
-            locales[loc] ?? { name: loc.toUpperCase(), code: "" };
-          const active = loc === locale;
-          return (
-            <Link key={loc} href={pathname} locale={loc} className="no-underline">
-              <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                <Flag code={item.code} alt={`${item.name} flag`} />
-                <span className="flex-1">{item.name}</span>
-                {active && <Check size={16} className="opacity-70" />}
-              </DropdownMenuItem>
-            </Link>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      {isOpen && (
+        <>
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+          <ul
+            role="listbox"
+            aria-label="Select language"
+            className="absolute right-0 top-full mt-2 z-50 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[160px]"
+          >
+            {routing.locales.map((loc) => {
+              const config = localeConfig[loc] || { name: loc, short: loc.toUpperCase(), flag: "" };
+              const isActive = loc === locale;
+              return (
+                <li key={loc} role="option" aria-selected={isActive}>
+                  <Link
+                    href={pathname}
+                    locale={loc}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:bg-gray-100 ${
+                      isActive
+                        ? "bg-gray-50 text-gray-900 font-medium"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    }`}
+                  >
+                    <img
+                      src={`https://flagcdn.com/20x15/${config.flag}.png`}
+                      width={20}
+                      height={15}
+                      alt=""
+                      aria-hidden="true"
+                      className="rounded-sm"
+                    />
+                    <span>{config.name}</span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
   );
 }
 
@@ -89,16 +116,26 @@ export function Header() {
   const t = useTranslations("Header");
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    if (isMobileMenuOpen) {
+      document.addEventListener("keydown", handleEscape);
+      return () => document.removeEventListener("keydown", handleEscape);
+    }
+  }, [isMobileMenuOpen]);
+
   const navItems = [
-    { href: "#about", label: t("nav.about") },
     { href: "#services", label: t("nav.services") },
-    { href: "#products", label: t("nav.products") },
-    { href: "#portfolio", label: t("nav.portfolio") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#about", label: t("nav.about") },
     { href: "#contact", label: t("nav.contact") },
   ];
 
@@ -110,99 +147,101 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-white/80 backdrop-blur-md shadow-md border-b border-gray-200"
-        : "bg-transparent"
-        }`}
+      role="banner"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-white/90 backdrop-blur-xl shadow-sm border-b border-gray-100"
+          : "bg-transparent"
+      }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="text-2xl font-extrabold tracking-tight text-gray-900 cursor-pointer">
-            <Link href="/" className="flex items-center">
-              Techn<span className="text-emerald-600">One</span>
-            </Link>
-          </div>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => scrollToSection(item.href)}
-                className="relative text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer"
-              >
-                <span className="inline-block relative group">
-                  {item.label}
-                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
-                </span>
-              </button>
-            ))}
-          </nav>
-
-          {/* Desktop CTAs + Language */}
-          <div className="hidden md:flex items-center space-x-3">
-            <Button
-              variant="outline"
-              onClick={() => scrollToSection("#contact")}
-              className="hover:border-emerald-500 transition-colors cursor-pointer"
-            >
-              {t("cta.getQuote")}
-            </Button>
-            <Button
-              onClick={() => scrollToSection("#contact")}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white transition-colors cursor-pointer"
-            >
-              {t("cta.contactUs")}
-            </Button>
-            <LanguageSwitcher />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-800"
-            onClick={() => setIsMobileMenuOpen((s) => !s)}
-            aria-label="Toggle menu"
+          <Link
+            href="/"
+            className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg"
+            aria-label="TechnOne - Go to homepage"
           >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+            <span className="text-2xl font-bold tracking-tight text-gray-900">
+              Techn<span className="text-emerald-600 group-hover:text-emerald-500 transition-colors">One</span>
+            </span>
+          </Link>
 
-        {/* Mobile Drawer */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 bg-white/95 backdrop-blur-xl rounded-lg shadow-lg border px-4 py-6 space-y-4">
+          {/* Desktop Nav - Centered */}
+          <nav
+            className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left text-base font-medium text-gray-700 hover:text-emerald-600 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
               >
                 {item.label}
               </button>
             ))}
+          </nav>
 
-            <div className="pt-2 space-y-3">
-              <Button
-                variant="outline"
-                className="w-full border-gray-300"
-                onClick={() => scrollToSection("#contact")}
+          {/* Desktop Right Side */}
+          <div className="hidden lg:flex items-center gap-2">
+            <LanguageSwitcher />
+            <Button
+              onClick={() => scrollToSection("#contact")}
+              className="bg-gray-900 hover:bg-gray-800 text-white rounded-full px-6 cursor-pointer transition-all hover:shadow-lg focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+            >
+              {t("cta.contactUs")}
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex lg:hidden items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              className="p-2 text-gray-700 hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+              onClick={() => setIsMobileMenuOpen((s) => !s)}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Drawer */}
+        <nav
+          id="mobile-menu"
+          role="navigation"
+          aria-label="Mobile navigation"
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
+            isMobileMenuOpen ? "max-h-96 pb-6" : "max-h-0"
+          }`}
+          aria-hidden={!isMobileMenuOpen}
+        >
+          <div className="flex flex-col gap-1 pt-2">
+            {navItems.map((item) => (
+              <button
+                key={item.href}
+                onClick={() => scrollToSection(item.href)}
+                tabIndex={isMobileMenuOpen ? 0 : -1}
+                className="px-4 py-3 text-left text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
               >
-                {t("cta.getQuote")}
-              </Button>
+                {item.label}
+              </button>
+            ))}
+            <div className="pt-4 mt-2 border-t border-gray-100">
               <Button
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-full"
                 onClick={() => scrollToSection("#contact")}
+                tabIndex={isMobileMenuOpen ? 0 : -1}
               >
                 {t("cta.contactUs")}
               </Button>
-
-              {/* Mobile: same switcher */}
-              <div className="flex justify-center">
-                <LanguageSwitcher className="w-full justify-center" />
-              </div>
             </div>
           </div>
-        )}
+        </nav>
       </div>
     </header>
   );

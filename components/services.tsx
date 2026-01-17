@@ -1,155 +1,78 @@
 "use client";
 
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
-  Code,
+  ShoppingCart,
   Smartphone,
   Globe,
-  Cloud,
   Palette,
-  Wrench,
-  Database,
-  Shield,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function Services() {
   const t = useTranslations("Services");
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-    });
-  }, []);
 
   const services = [
     {
-      icon: Code,
-      title: "Custom Software Development",
-      description:
-        "Tailored software solutions built to your exact specifications and business requirements.",
-      technologies: ["React", "Node.js", "Python", "Java"],
+      icon: ShoppingCart,
+      title: t("services.customDev.title"),
+      description: t("services.customDev.description"),
     },
     {
       icon: Smartphone,
-      title: "Mobile App Development",
-      description:
-        "Native and cross-platform mobile applications for iOS and Android.",
-      technologies: ["React Native", "Flutter", "Swift", "Kotlin"],
+      title: t("services.mobile.title"),
+      description: t("services.mobile.description"),
     },
     {
       icon: Globe,
-      title: "Web App Development",
-      description:
-        "Modern, responsive web applications with cutting-edge technologies.",
-      technologies: ["Next.js", "Vue.js", "Angular", "TypeScript"],
-    },
-    {
-      icon: Cloud,
-      title: "SaaS Product Development",
-      description:
-        "Scalable Software-as-a-Service solutions from concept to deployment.",
-      technologies: ["AWS", "Docker", "Kubernetes", "Microservices"],
-    },
-    {
-      icon: Database,
-      title: "Cloud Solutions",
-      description:
-        "Cloud migration, architecture design, and infrastructure optimization.",
-      technologies: ["AWS", "Azure", "GCP", "Terraform"],
+      title: t("services.web.title"),
+      description: t("services.web.description"),
     },
     {
       icon: Palette,
-      title: "UI/UX Design",
-      description:
-        "User-centered design that creates intuitive and engaging experiences.",
-      technologies: ["Figma", "Adobe XD", "Sketch", "Prototyping"],
-    },
-    {
-      icon: Wrench,
-      title: "Maintenance & Support",
-      description:
-        "Ongoing support, updates, and optimization for your software solutions.",
-      technologies: [
-        "24/7 Support",
-        "Performance Monitoring",
-        "Security Updates",
-      ],
-    },
-    {
-      icon: Shield,
-      title: "DevOps & Security",
-      description: "Secure deployment pipelines and infrastructure management.",
-      technologies: ["CI/CD", "Jenkins", "GitLab", "Security Audits"],
+      title: t("services.design.title"),
+      description: t("services.design.description"),
     },
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    <section
+      id="services"
+      aria-labelledby="services-heading"
+      className="py-24 bg-gray-50"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 id="services-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             {t("heading")}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             {t("description")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <ul className="grid md:grid-cols-2 lg:grid-cols-4 gap-8" role="list">
           {services.map((service, index) => (
-            <Card
+            <li
               key={index}
-              className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              className="group p-6 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <CardHeader className="pb-4">
-                <div className="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-emerald-200 transition-colors">
-                  <service.icon className="h-6 w-6 text-emerald-600" />
-                </div>
-                <CardTitle className="text-lg">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-4 text-sm">
-                  {service.description}
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {service.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-md"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+              <div
+                className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-100 transition-colors"
+                aria-hidden="true"
+              >
+                <service.icon className="h-6 w-6 text-gray-700 group-hover:text-emerald-600 transition-colors" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                {service.title}
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                {service.description}
+              </p>
+            </li>
           ))}
-        </div>
-
-        <div
-          className="text-center mt-12"
-          data-aos="fade-up"
-          data-aos-delay="800"
-        >
-          <Button
-            size="lg"
-            onClick={() => {
-              const element = document.querySelector("#contact");
-              if (element) element.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
-            {t("cta")}
-          </Button>
-        </div>
+        </ul>
       </div>
     </section>
   );
