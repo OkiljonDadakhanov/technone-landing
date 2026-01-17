@@ -63,11 +63,11 @@ export function Footer() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="mailto:hello@technone.uz"
+                    href="mailto:oqiljondadaxanov@gmail.com"
                     className="flex items-center gap-3 text-gray-400 text-sm hover:text-white transition-colors focus:outline-none focus-visible:text-white focus-visible:underline"
                   >
                     <Mail className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-                    <span>hello@technone.uz</span>
+                    <span>oqiljondadaxanov@gmail.com</span>
                   </a>
                 </li>
                 <li>

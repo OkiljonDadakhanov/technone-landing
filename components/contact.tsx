@@ -121,11 +121,11 @@ Message: ${formData.message}
             data-aos-delay="100"
           >
             <a
-              href="mailto:hello@technone.uz"
+              href="mailto:oqiljondadaxanov@gmail.com"
               className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus-visible:text-gray-900 focus-visible:underline"
             >
               <Mail className="h-5 w-5" aria-hidden="true" />
-              <span>hello@technone.uz</span>
+              <span>oqiljondadaxanov@gmail.com</span>
             </a>
             <a
               href="tel:+998991093414"
