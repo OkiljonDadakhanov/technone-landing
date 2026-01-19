@@ -2,6 +2,7 @@
 
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { contactInfo } from "@/config/contact";
 
 export function Footer() {
   const t = useTranslations("Footer");
@@ -63,25 +64,25 @@ export function Footer() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="mailto:oqiljondadaxanov@gmail.com"
+                    href={`mailto:${contactInfo.email}`}
                     className="flex items-center gap-3 text-gray-400 text-sm hover:text-white transition-colors focus:outline-none focus-visible:text-white focus-visible:underline"
                   >
                     <Mail className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-                    <span>oqiljondadaxanov@gmail.com</span>
+                    <span>{contactInfo.email}</span>
                   </a>
                 </li>
                 <li>
                   <a
-                    href="tel:+998991093414"
+                    href={`tel:${contactInfo.phoneRaw}`}
                     className="flex items-center gap-3 text-gray-400 text-sm hover:text-white transition-colors focus:outline-none focus-visible:text-white focus-visible:underline"
                   >
                     <Phone className="h-4 w-4 text-emerald-500 flex-shrink-0" aria-hidden="true" />
-                    <span>+998 99 109 34 14</span>
+                    <span>{contactInfo.phone}</span>
                   </a>
                 </li>
                 <li className="flex items-start gap-3 text-gray-400 text-sm">
                   <MapPin className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <span>Tashkent, Uzbekistan</span>
+                  <span>{contactInfo.address.city}, {contactInfo.address.country}</span>
                 </li>
               </ul>
             </address>

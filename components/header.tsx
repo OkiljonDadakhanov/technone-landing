@@ -1,119 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
-import { Link, usePathname } from "@/src/i18n/navigation";
-import { routing } from "@/src/i18n/routing";
-
-const localeConfig: Record<string, { name: string; short: string; flag: string }> = {
-  en: { name: "English", short: "EN", flag: "gb" },
-  ru: { name: "Русский", short: "RU", flag: "ru" },
-  uz: { name: "O'zbekcha", short: "UZ", flag: "uz" },
-};
-
-function LanguageSwitcher() {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const current = localeConfig[locale] || localeConfig.en;
-
-  // Close on escape key
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsOpen(false);
-    };
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-      return () => document.removeEventListener("keydown", handleEscape);
-    }
-  }, [isOpen]);
-
-  return (
-    <div className="relative" ref={dropdownRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            setIsOpen(!isOpen);
-          }
-        }}
-        className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
-        aria-expanded={isOpen}
-        aria-haspopup="listbox"
-        aria-label={`Current language: ${current.name}. Click to change language.`}
-      >
-        <img
-          src={`https://flagcdn.com/20x15/${current.flag}.png`}
-          width={20}
-          height={15}
-          alt=""
-          aria-hidden="true"
-          className="rounded-sm"
-        />
-        <span className="hidden sm:inline">{current.short}</span>
-        <ChevronDown
-          size={14}
-          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
-          aria-hidden="true"
-        />
-      </button>
-
-      {isOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setIsOpen(false)}
-            aria-hidden="true"
-          />
-          <ul
-            role="listbox"
-            aria-label="Select language"
-            className="absolute right-0 top-full mt-2 z-50 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[160px]"
-          >
-            {routing.locales.map((loc) => {
-              const config = localeConfig[loc] || { name: loc, short: loc.toUpperCase(), flag: "" };
-              const isActive = loc === locale;
-              return (
-                <li key={loc} role="option" aria-selected={isActive}>
-                  <Link
-                    href={pathname}
-                    locale={loc}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:bg-gray-100 ${
-                      isActive
-                        ? "bg-gray-50 text-gray-900 font-medium"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    }`}
-                  >
-                    <img
-                      src={`https://flagcdn.com/20x15/${config.flag}.png`}
-                      width={20}
-                      height={15}
-                      alt=""
-                      aria-hidden="true"
-                      className="rounded-sm"
-                    />
-                    <span>{config.name}</span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </>
-      )}
-    </div>
-  );
-}
+import { Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations("Header");
+  const mobileMenuRef = useFocusTrap<HTMLElement>(isMobileMenuOpen);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -121,7 +20,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile menu on escape
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsMobileMenuOpen(false);
@@ -212,6 +110,7 @@ export function Header() {
 
         {/* Mobile Drawer */}
         <nav
+          ref={mobileMenuRef}
           id="mobile-menu"
           role="navigation"
           aria-label="Mobile navigation"

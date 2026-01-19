@@ -1,9 +1,15 @@
 import "../globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/src/i18n/routing";
 import { AOSProvider } from "@/components/aos-provider";
+import { GoogleAnalytics } from "@/components/google-analytics";
+import {
+  generateOrganizationSchema,
+  generateFAQSchema,
+  generateLocalBusinessSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema";
 import type { Metadata, Viewport } from "next";
 
 type Props = {
@@ -122,33 +128,17 @@ export default async function LocaleLayout({
   let messages;
   try {
     messages = (await import(`@/messages/${locale}.json`)).default;
-  } catch (error) {
+  } catch {
     notFound();
   }
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "TechnOne",
-    url: "https://technone.uz",
-    logo: "https://technone.uz/logo.png",
-    description: "Software development agency specializing in web and mobile applications",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Tashkent",
-      addressCountry: "UZ",
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+998-99-109-34-14",
-      contactType: "sales",
-      availableLanguage: ["English", "Russian", "Uzbek"],
-    },
-    sameAs: [
-      "https://github.com/technone",
-      "https://linkedin.com/company/technone",
-    ],
-  };
+  // Generate all schemas
+  const organizationSchema = generateOrganizationSchema();
+  const faqSchema = generateFAQSchema(locale);
+  const localBusinessSchema = generateLocalBusinessSchema(locale);
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: `https://technone.uz/${locale}` },
+  ]);
 
   return (
     <html lang={locale} className="scroll-smooth">
@@ -157,10 +147,23 @@ export default async function LocaleLayout({
         <link rel="dns-prefetch" href="https://flagcdn.com" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gray-900 focus:text-white focus:rounded-lg"
