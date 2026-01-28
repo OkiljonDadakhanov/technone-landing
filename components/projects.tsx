@@ -22,7 +22,7 @@ export function Projects() {
     },
     {
       title: "EpixRent",
-      url: "https://info.epixrent.uz/",
+      url: "https://info-epix-rent.vercel.app/",
       description: t("items.epixrent"),
       category: "Mobility",
     },
