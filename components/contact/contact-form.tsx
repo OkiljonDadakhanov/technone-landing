@@ -63,7 +63,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <div className="grid sm:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <Label htmlFor="contact-name" className="text-gray-700">
+          <Label htmlFor="contact-name" className="text-gray-700 dark:text-gray-300">
             {t("fields.fullName")}
           </Label>
           <Input
@@ -75,7 +75,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
             placeholder={t("placeholders.fullName")}
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "name-error" : undefined}
-            className={`bg-gray-50 border-gray-200 focus:bg-white ${
+            className={`bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-gray-800 ${
               errors.name ? "border-red-500" : ""
             }`}
           />
@@ -86,7 +86,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
           )}
         </div>
         <div className="space-y-2">
-          <Label htmlFor="contact-phone" className="text-gray-700">
+          <Label htmlFor="contact-phone" className="text-gray-700 dark:text-gray-300">
             {t("fields.phone")}
           </Label>
           <Input
@@ -99,7 +99,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
             placeholder="+998 90 123 45 67"
             aria-invalid={!!errors.phone}
             aria-describedby={errors.phone ? "phone-error" : undefined}
-            className={`bg-gray-50 border-gray-200 focus:bg-white ${
+            className={`bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-gray-800 ${
               errors.phone ? "border-red-500" : ""
             }`}
           />
@@ -112,7 +112,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="contact-message" className="text-gray-700">
+        <Label htmlFor="contact-message" className="text-gray-700 dark:text-gray-300">
           {t("fields.message")}
         </Label>
         <Textarea
@@ -124,7 +124,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
           rows={5}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className={`bg-gray-50 border-gray-200 focus:bg-white resize-none ${
+          className={`bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 focus:bg-white dark:focus:bg-gray-800 resize-none ${
             errors.message ? "border-red-500" : ""
           }`}
         />
@@ -138,7 +138,7 @@ export function ContactForm({ onSuccess }: ContactFormProps) {
       <Button
         type="submit"
         size="lg"
-        className="w-full cursor-pointer bg-gray-900 hover:bg-gray-800 text-white rounded-full py-6 focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+        className="w-full cursor-pointer bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-gray-900 rounded-full py-6 focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
         disabled={isSubmitting}
         aria-disabled={isSubmitting}
       >

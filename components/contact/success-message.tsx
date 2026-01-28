@@ -7,7 +7,7 @@ export function SuccessMessage() {
 
   return (
     <div
-      className="text-center py-12 bg-emerald-50 rounded-2xl"
+      className="text-center py-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl"
       role="status"
       aria-live="polite"
     >

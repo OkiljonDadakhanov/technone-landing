@@ -36,14 +36,14 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative min-h-screen flex flex-col justify-center bg-white"
+      className="relative min-h-screen flex flex-col justify-center bg-white dark:bg-gray-950"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="max-w-4xl mx-auto text-center" data-aos="fade-up">
           {/* Main Headline */}
           <h1
             id="hero-heading"
-            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 leading-[1.1] tracking-tight mb-6"
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white leading-[1.1] tracking-tight mb-6"
           >
             {t.rich("title", {
               em: (chunks) => (
@@ -53,7 +53,7 @@ export function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto mb-10">
             {t("description")}
           </p>
 
@@ -61,7 +61,7 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
-              className="group cursor-pointer bg-gray-900 text-white hover:bg-gray-800 transition-all text-base px-8 py-6 rounded-full focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+              className="group cursor-pointer bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-200 transition-all text-base px-8 py-6 rounded-full focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
               onClick={() => scrollToSection("#contact")}
             >
               {t("cta.primary")}
@@ -70,7 +70,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="ghost"
-              className="cursor-pointer text-gray-600 hover:text-gray-900 text-base focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+              className="cursor-pointer text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white text-base focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
               onClick={() => scrollToSection("#projects")}
             >
               {t("cta.seeOurWork")}
@@ -79,29 +79,29 @@ export function Hero() {
 
           {/* Stats */}
           <div
-            className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 mt-16 pt-10 border-t border-gray-100"
+            className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 mt-16 pt-10 border-t border-gray-100 dark:border-gray-800"
             data-aos="fade-up"
             data-aos-delay="200"
             role="list"
             aria-label="Company statistics"
           >
             <div className="text-center" role="listitem">
-              <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+              <div className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-1">
                 8+
               </div>
-              <div className="text-sm text-gray-500">{t("stats.projects")}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t("stats.projects")}</div>
             </div>
             <div className="text-center" role="listitem">
               <div className="text-3xl lg:text-4xl font-bold text-emerald-600 mb-1">
                 25k+
               </div>
-              <div className="text-sm text-gray-500">{t("stats.monthlyVisits")}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t("stats.monthlyVisits")}</div>
             </div>
             <div className="text-center" role="listitem">
-              <div className="text-3xl lg:text-4xl font-bold text-gray-900 mb-1">
+              <div className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-1">
                 &lt;1s
               </div>
-              <div className="text-sm text-gray-500">{t("stats.loadTime")}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{t("stats.loadTime")}</div>
             </div>
           </div>
         </div>
@@ -117,13 +117,13 @@ export function Hero() {
               key={index}
               className="text-center p-6"
             >
-              <div className="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <benefit.icon className="h-6 w-6 text-emerald-600" aria-hidden="true" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 {benefit.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 {benefit.description}
               </p>
             </div>

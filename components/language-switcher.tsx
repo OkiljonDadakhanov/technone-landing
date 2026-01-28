@@ -41,7 +41,7 @@ export function LanguageSwitcher() {
             setIsOpen(!isOpen);
           }
         }}
-        className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+        className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors cursor-pointer rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-label={`Current language: ${current.name}. Click to change language.`}
@@ -72,7 +72,7 @@ export function LanguageSwitcher() {
           <ul
             role="listbox"
             aria-label="Select language"
-            className="absolute right-0 top-full mt-2 z-50 bg-white rounded-xl shadow-lg border border-gray-100 py-2 min-w-[160px]"
+            className="absolute right-0 top-full mt-2 z-50 bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-100 dark:border-gray-800 py-2 min-w-[160px]"
           >
             {routing.locales.map((loc) => {
               const config = localeConfig[loc] || { name: loc, short: loc.toUpperCase(), flag: "" };
@@ -83,10 +83,10 @@ export function LanguageSwitcher() {
                     href={pathname}
                     locale={loc}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:bg-gray-100 ${
+                    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-colors focus:outline-none focus-visible:bg-gray-100 dark:focus-visible:bg-gray-800 ${
                       isActive
-                        ? "bg-gray-50 text-gray-900 font-medium"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                        ? "bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white font-medium"
+                        : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
                     }`}
                   >
                     <Image

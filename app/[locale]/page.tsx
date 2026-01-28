@@ -9,7 +9,7 @@ import { ErrorBoundary } from "@/components/error-boundary";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
       <Header />
       <main id="main-content" role="main">
         <ErrorBoundary>

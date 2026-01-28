@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/src/i18n/navigation";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 export function Header() {
@@ -48,7 +49,7 @@ export function Header() {
       role="banner"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-sm border-b border-gray-100"
+          ? "bg-white/90 dark:bg-gray-950/90 backdrop-blur-xl shadow-sm border-b border-gray-100 dark:border-gray-800"
           : "bg-transparent"
       }`}
     >
@@ -60,7 +61,7 @@ export function Header() {
             className="flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 rounded-lg"
             aria-label="TechnOne - Go to homepage"
           >
-            <span className="text-2xl font-bold tracking-tight text-gray-900">
+            <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               Techn<span className="text-emerald-600 group-hover:text-emerald-500 transition-colors">One</span>
             </span>
           </Link>
@@ -75,7 +76,7 @@ export function Header() {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 rounded-full hover:bg-gray-100 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
               >
                 {item.label}
               </button>
@@ -84,10 +85,11 @@ export function Header() {
 
           {/* Desktop Right Side */}
           <div className="hidden lg:flex items-center gap-2">
+            <ThemeToggle />
             <LanguageSwitcher />
             <Button
               onClick={() => scrollToSection("#contact")}
-              className="bg-gray-900 hover:bg-gray-800 text-white rounded-full px-6 cursor-pointer transition-all hover:shadow-lg focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2"
+              className="bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-gray-900 rounded-full px-6 cursor-pointer transition-all hover:shadow-lg focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100 focus-visible:ring-offset-2"
             >
               {t("cta.contactUs")}
             </Button>
@@ -95,9 +97,10 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
+            <ThemeToggle />
             <LanguageSwitcher />
             <button
-              className="p-2 text-gray-700 hover:bg-gray-100 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+              className="p-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100"
               onClick={() => setIsMobileMenuOpen((s) => !s)}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -125,14 +128,14 @@ export function Header() {
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
                 tabIndex={isMobileMenuOpen ? 0 : -1}
-                className="px-4 py-3 text-left text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                className="px-4 py-3 text-left text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-gray-100"
               >
                 {item.label}
               </button>
             ))}
-            <div className="pt-4 mt-2 border-t border-gray-100">
+            <div className="pt-4 mt-2 border-t border-gray-100 dark:border-gray-800">
               <Button
-                className="w-full bg-gray-900 hover:bg-gray-800 text-white rounded-full"
+                className="w-full bg-gray-900 dark:bg-white hover:bg-gray-800 dark:hover:bg-gray-200 text-white dark:text-gray-900 rounded-full"
                 onClick={() => scrollToSection("#contact")}
                 tabIndex={isMobileMenuOpen ? 0 : -1}
               >

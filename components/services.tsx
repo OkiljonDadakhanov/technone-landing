@@ -38,14 +38,14 @@ export function Services() {
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="py-24 bg-gray-50"
+      className="py-24 bg-gray-50 dark:bg-gray-900"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16" data-aos="fade-up">
-          <h2 id="services-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 id="services-heading" className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t("heading")}
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {t("description")}
           </p>
         </div>
@@ -54,20 +54,20 @@ export function Services() {
           {services.map((service, index) => (
             <li
               key={index}
-              className="group p-6 bg-white rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300"
+              className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600 hover:shadow-lg transition-all duration-300"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
               <div
-                className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-100 transition-colors"
+                className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-xl flex items-center justify-center mb-5 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/30 transition-colors"
                 aria-hidden="true"
               >
-                <service.icon className="h-6 w-6 text-gray-700 group-hover:text-emerald-600 transition-colors" />
+                <service.icon className="h-6 w-6 text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 transition-colors" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 {service.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 {service.description}
               </p>
             </li>

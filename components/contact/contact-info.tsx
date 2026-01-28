@@ -12,14 +12,14 @@ export function ContactInfo() {
     >
       <a
         href={`mailto:${contactInfo.email}`}
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus-visible:text-gray-900 focus-visible:underline"
+        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus-visible:text-gray-900 dark:focus-visible:text-white focus-visible:underline"
       >
         <Mail className="h-5 w-5" aria-hidden="true" />
         <span>{contactInfo.email}</span>
       </a>
       <a
         href={`tel:${contactInfo.phoneRaw}`}
-        className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus-visible:text-gray-900 focus-visible:underline"
+        className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors focus:outline-none focus-visible:text-gray-900 dark:focus-visible:text-white focus-visible:underline"
       >
         <Phone className="h-5 w-5" aria-hidden="true" />
         <span>{contactInfo.phone}</span>

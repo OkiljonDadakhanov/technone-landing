@@ -3,6 +3,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/src/i18n/routing";
 import { AOSProvider } from "@/components/aos-provider";
+import { ThemeProvider } from "@/components/theme-provider";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import {
   generateOrganizationSchema,
@@ -141,7 +142,7 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <html lang={locale} className="scroll-smooth">
+    <html lang={locale} className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://flagcdn.com" />
         <link rel="dns-prefetch" href="https://flagcdn.com" />
@@ -166,12 +167,19 @@ export default async function LocaleLayout({
         <GoogleAnalytics />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gray-900 focus:text-white focus:rounded-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-gray-900 dark:focus:bg-white focus:text-white dark:focus:text-gray-900 focus:rounded-lg"
         >
           Skip to main content
         </a>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AOSProvider>{children}</AOSProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AOSProvider>{children}</AOSProvider>
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
