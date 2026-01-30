@@ -63,6 +63,12 @@ export function Projects() {
       description: t("items.integerAcademy"),
       category: "Education",
     },
+    {
+      title: "IChO 2026",
+      url: "https://icho2026.uz/",
+      description: t("items.icho2026"),
+      category: "Education",
+    },
   ];
 
   return (
