@@ -57,6 +57,12 @@ export function Projects() {
       category: "Mobility",
       telegramBot: "https://t.me/rentcarnamanganbot",
     },
+    {
+      title: "Integer Academy",
+      url: "https://www.integer-academy.uz/",
+      description: t("items.integerAcademy"),
+      category: "Education",
+    },
   ];
 
   return (
